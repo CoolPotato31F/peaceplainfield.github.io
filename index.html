@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peace Lutheran — Home</title>
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <style>
+    :root {
+      --primary: #0D348F;
+      /* rgb(13,52,143) */
+      --accent-gold: #F2C94C;
+      --accent-light: #0D7BEF;
+      --muted: #6B7280;
+      --bg: #F7F9FC;
+      --card: #FFFFFF;
+      --radius: 4px;
+      --max-width: 1100px;
+      --container-pad: 20px;
+      --shadow: 0 6px 20px rgba(13, 52, 143, 0.08);
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111
+    }
+
+    .wrap {
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 var(--container-pad)
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    nav {
+      display: flex;
+      align-items: center
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- NEW: dropdown nav styles ---------- */
+    /* Use details/summary for accessible dropdown */
+    nav details {
+      position: relative;
+      margin-left: 18px;
+    }
+
+    nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+
+    /* remove default marker */
+    nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* simple caret */
+    nav summary::after {
+      content: " ▾";
+      font-size: 0.9em;
+      color: var(--primary);
+      margin-left: 6px;
+      transition: transform 160ms ease;
+      display: inline-block;
+    }
+
+    nav details[open] summary::after {
+      transform: rotate(-180deg);
+    }
+
+    /* dropdown menu */
+    nav details>ul {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      padding: 8px 6px;
+      min-width: 180px;
+      z-index: 100;
+      margin: 0;
+      list-style: none;
+    }
+
+    nav details>ul li {
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    nav details>ul li a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav details>ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- end dropdown styles ---------- */
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      margin-top: 18px;
+      align-items: center
+    }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: 6px;
+      padding: 28px;
+      box-shadow: var(--shadow)
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    h1 {
+      margin: 10px 0 6px;
+      font-size: 34px;
+      color: var(--primary)
+    }
+
+    p.lead {
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5
+    }
+
+    .ctas {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px
+    }
+
+    .btn {
+      padding: 12px 18px;
+      border-radius: 3px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 0
+    }
+
+    .btn-primary {
+      Background: var(--primary);
+      color: #fff
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary)
+    }
+
+    .hero-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 18px rgba(13, 52, 143, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      transition: transform 140ms ease, background 140ms ease, opacity 140ms ease;
+      opacity: 0;
+      color: var(--primary);
+      pointer-events: none;
+      transition:
+        opacity 220ms ease,
+        transform 220ms ease;
+    }
+
+    /* slide directions */
+    .hero-prev {
+      transform: translate(-6px, -50%);
+    }
+
+    .hero-next {
+      transform: translate(6px, -50%);
+    }
+
+    /* show on hover OR keyboard focus */
+    .hero-image:hover .hero-btn,
+    .hero-image:focus-within .hero-btn {
+      opacity: 0.95;
+      pointer-events: auto;
+    }
+
+    /* reset transform when visible */
+    .hero-image:hover .hero-prev,
+    .hero-image:focus-within .hero-prev {
+      transform: translate(0, -50%);
+    }
+
+    .hero-image:hover .hero-next,
+    .hero-image:focus-within .hero-next {
+      transform: translate(0, -50%);
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-50%) scale(1.06);
+      background: #fff;
+    }
+
+    .hero-btn:active {
+      transform: translateY(-50%) scale(0.98);
+    }
+
+    .hero-prev {
+      left: 10px;
+    }
+
+    .hero-next {
+      right: 10px;
+    }
+
+    /* Right column: image placeholder and quick info */
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .hero-image {
+      position: relative;
+      height: 220px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--primary), var(--accent-light));
+      display: block
+    }
+
+    .hero-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1s ease-in-out;
+      opacity: 1;
+
+      image-rendering: smooth;
+    }
+
+    .hero-img.hidden {
+      opacity: 0
+    }
+
+    .quick {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .quick .item {
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 3px
+    }
+
+    /* Sections */
+    section {
+      margin-top: 28px
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 4px;
+      padding: 18px;
+      box-shadow: var(--shadow)
+    }
+
+    .card-hero {
+      height: 140px;
+      border-radius: 4px 4px 0 0;
+      overflow: hidden;
+      margin: -18px -18px 12px;
+      /* stretch to card edges */
+    }
+
+    .card-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Daily Devotions */
+    .video-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Staff grid */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    .staff {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 4px;
+      text-align: center
+    }
+
+    .staff img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: block;
+      border: 3px solid var(--primary)
+    }
+
+    .staff h4 {
+      margin: 6px 0 2px;
+      font-size: 18px
+    }
+
+    .staff .role {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 14px
+    }
+
+    .staff .desc {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.4
+    }
+
+    /* Calendar */
+    .calendar-wrap {
+      display: flex;
+      gap: 18px
+    }
+
+    .calendar {
+      flex: 1;
+      background: var(--card);
+      padding: 12px;
+      border-radius: 4px
+    }
+
+    .cal-embed {
+      height: 360px;
+      border-radius: 2px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted)
+    }
+
+    /* footer */
+    footer {
+      padding: 18px 0;
+      border-top: 1px solid #eee;
+      background: transparent;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--container-pad);
+      max-width: 100%;
+    }
+
+    .footer-center {
+      justify-self: center;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .footer-right {
+      justify-self: end
+    }
+
+    .footer-link {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      height: 28px;
+      opacity: .8;
+      transition: transform .16s, opacity .16s
+    }
+
+    .footer-link:hover .footer-logo {
+      opacity: 1;
+      transform: translateY(-1px)
+    }
+
+    /* Responsive */
+    @media (max-width:920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr
+      }
+
+      .staff-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+
+      .footer-right {
+        justify-self: center
+      }
+
+      /* ensure dropdown fits on smaller screens */
+      nav details>ul {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    @media (max-width:520px) {
+      .staff-grid {
+        grid-template-columns: 1fr
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .footer-right {
+        justify-self: center;
+      }
+    }
+
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Scroll/Parallax image styles */
+    /* Parallax wrapper + image */
+    .parallax {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      /* fixed height already set inline where needed (or set here) */
+      will-change: transform, opacity;
+    }
+
+    /* The image is centered and slightly oversized so movement reveals different parts */
+    .parallax img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, calc(-50% + var(--parallax, 0)));
+      /* ensure it covers and is larger than container for movement */
+      min-width: 100%;
+      width: auto;
+      object-fit: cover;
+      transition: opacity 700ms cubic-bezier(.2, .8, .2, 1);
+      /* keep fade */
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* fade-in when wrapper enters view */
+    .parallax.in-view img {
+      opacity: 1;
+      /* when visible we still allow JS to control --parallax freely */
+      --parallax: 0;
+    }
+
+    /* smaller screens: smaller oversize so it doesn't blow up */
+    @media (max-width:640px) {
+      .parallax img {
+        min-height: 110%;
+      }
+    }
+
+    @media (max-width:640px) {
+      .scrolly {
+        max-height: 220px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="logo" src="images/logo.png" alt="Peace Lutheran logo">
+        <div>
+          <div style="font-weight:800;color:var(--primary)">Peace Lutheran</div>
+          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
+        <a href="#devotion">Daily Devotion</a>
+        <a href="#events">Calendar</a>
+        <a href="staff.html">Staff</a>
+
+        <!-- NEW: Other dropdown -->
+        <details>
+          <summary>Other</summary>
+          <ul>
+            <li><a href="bible-studies.html">Bible Studies</a></li>
+            <li><a href="sermons.html">Sermons</a></li>
+          </ul>
+        </details>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Welcome</div>
+        <h1>Peace Lutheran — Worship • Grow • Serve</h1>
+        <p class="lead">We are a Lutheran congregation rooted in the Gospel. Join us for worship, study, and service —
+          all are welcome.</p>
+        <div class="ctas">
+          <button onclick="location.href='https://maps.app.goo.gl/FXUWn1VD3qzejPuw7'"
+            class="btn btn-primary">Visit</button>
+          <button class="btn btn-ghost" data-scroll-target="devotion">Daily Devotions</button>
+        </div>
+
+        <!-- Core professional must-haves as quick bullets -->
+        <div style="margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+          <div class="card">• <a href="bible-studies.html"
+              style="margin-left: 18px;color: var(--primary);text-decoration: none;font-weight: 600">Bible Studies</a>
+          </div>
+          <div class="card">• <a href="sermons.html"
+              style="margin-left: 18px;color: var(--primary);text-decoration: none;font-weight: 600">Sermons</a></div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="hero-image" aria-hidden="false">
+          <button class="hero-btn hero-prev" aria-label="Previous image" title="Previous image">
+            <!-- left arrow SVG -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <button class="hero-btn hero-next" aria-label="Next image" title="Next image">
+            <!-- right arrow SVG -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <img class="hero-img" src="images/HeroImages/1.jpg" alt="Peace Lutheran Church — Main Sanctuary" />
+          <img class="hero-img hidden" src="images/HeroImages/2.jpg" alt="Peace Lutheran Church — Fellowship Room" />
+        </div>
+
+        <div class="quick">
+          <div class="item"><strong>Service Times:</strong><br>Saturdays: <br>• 5:30 PM (Traditional)<br> Sundays: <br>•
+            8:30 AM (Traditional)<br>• 11:00 AM (Contemporary)</div>
+          <div class="item"><strong>Location:</strong><br> 24024 West Main Street, Plainfield, IL — <a
+              href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Get Directions</a></div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- BELIEFS / ABOUT -->
+    <section id="about">
+      <div class="parallax" data-speed="-0.7"
+        style="width:100%;max-height:260px;height:260px;margin-bottom:14px;border-radius:4px;">
+        <img src="images/about-congregation.jpg" style="width:100%"
+          alt="Congregation gathered for bible study at Peace Lutheran">
+      </div>
+      <!-- IMAGE DESCRIPTION: Wide photo of the congregation during a Sunday service or fellowship time, showing community and warmth -->
+      <div class="card" style="padding:20px">
+        <h2 style="color:var(--primary)">Who We Are</h2>
+        <p>Peace Lutheran is a congregation in the Lutheran tradition. <em>Placeholder for a short paragraph summarizing
+            mission & confessional stance.</em></p>
+
+        <h3 style="margin-top:14px">Quick Beliefs</h3>
+        <div class="cards" style="margin-top:10px">
+          <div class="card">
+            <h4>Scripture</h4>
+            <p>(placeholder)</p>
+          </div>
+          <div class="card">
+            <h4>Sacraments</h4>
+            <p>(placeholder)</p>
+          </div>
+          <div class="card">
+            <h4>Grace</h4>
+            <p>(placeholder)</p>
+          </div>
+        </div>
+        <a style="color:var(--muted);" href="https://www.lcms.org/about/beliefs" target="_blank">Click here for more
+          information</a>
+      </div>
+    </section>
+
+    <section id="devotion">
+      <h1>Daily Devotion</h1>
+      <p class="lead">
+        Join us each day for a short devotion and prayer from Peace Lutheran.
+      </p>
+
+      <div class="video-wrap">
+        <iframe width="784" height="441"
+          src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE99LodABGoSNZQQZB8Vpxft"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- MINISTRIES -->
+    <section id="ministries">
+      <h2 style="color:var(--primary)">Ministries</h2>
+
+      <div class="cards" style="margin-top:12px">
+        <div class="card">
+          <div class="card-hero">
+            <img src="images/ministries-children.jpg" alt="Children and youth ministry at Peace Lutheran">
+          </div>
+          <h4>Children & Youth</h4>
+          <p>Sunday School, Youth Group, Vacation Bible School (placeholders).</p>
+        </div>
+
+        <div class="card">
+          <div class="card-hero">
+            <img src="images/ministries-confirmation.jpg" alt="Junior confirmation class at Peace Lutheran">
+          </div>
+          <h4>Jr. Confirmation</h4>
+          <p>Bible studies, small groups, and classes for faith formation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAFF & LEADERSHIP -->
+    <section id="staff">
+      <h2 style="color:var(--primary)">Staff & Leadership</h2>
+      <div class="staff-grid" style="margin-top:12px">
+        <div class="staff">
+          <img src="images/staff-pastor.jpg" alt="Peace Lutheran Pastor David Balla" />
+          <h4>David Balla</h4>
+          <div class="role">Pastor</div>
+          <div class="desc">Preaches the Word, administers the Sacraments, and provides spiritual care and leadership
+            for the congregation.</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-head_elder.jpg" alt="Peace Lutheran Head Elder Donovan Fechner" />
+          <h4>Donovan Fechner</h4>
+          <div class="role">Elder Chair</div>
+          <div class="desc">Manages (placeholder)</div>
+        </div>
+        
+        <div class="staff">
+          <img src="images/staff-secretary.jpg" alt="Peace Lutheran Church Secretary" />
+          <h4>Diane Bennett</h4>
+          <div class="role">Church Secretary</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+      </div>
+      <a style="color:var(--muted)" href="staff.html">Click here for more staff</a>
+    </section>
+
+    <!-- CALENDAR / EVENTS -->
+    <section id="events">
+      <h2 style="color:var(--primary)">Events & Calendar</h2>
+      <div class="calendar-wrap" style="margin-top:12px">
+        <div class="calendar">
+          <h4 style="margin-top:0px">Upcoming Events</h4>
+          <ul>
+            <li>Parade — Dec 31</li>
+          </ul>
+        </div>
+        <div class="calendar">
+<iframe src=https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=0&showTitle=0&src=cGxjcGZsZEBnbWFpbC5jb20&color=%23039be5 style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="margin-top:28px;">
+      <h2 style="color:var(--primary)">Contact Us</h2>
+      <p class="lead">Have questions or want to get in touch? Fill out the form below and we’ll get back to you.</p>
+
+      <div class="card" style="padding:20px; max-width:600px;">
+        <form action="https://formspree.io/f/xpqravnl" method="POST" id="contact-form">
+          <label for="name">Name</label><br>
+          <input type="text" id="name" name="name" placeholder="Your Name" required
+            style="width:100%; padding:8px; margin-bottom:12px; border-radius:4px; border:1px solid #ccc;">
+
+          <label for="email">Email</label><br>
+          <input type="email" id="email" name="_replyto" placeholder="Your Email" required
+            style="width:100%; padding:8px; margin-bottom:12px; border-radius:4px; border:1px solid #ccc;">
+
+          <label for="message">Message</label><br>
+          <textarea id="message" name="message" rows="6" placeholder="Your Message" required
+            style="width:100%; padding:8px; margin-bottom:12px; border-radius:4px; border:1px solid #ccc;"></textarea>
+
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div id="form-response" style="margin-top:12px; color:var(--primary); display:none;"></div>
+      </div>
+    </section>
+
+    <!-- SOCIALS -->
+    <section id="socials" style="margin-top:28px; text-align:center;">
+      <h2 style="color:var(--primary)">Connect With Us</h2>
+      <p class="lead">Follow us on social media to stay updated!</p>
+      <div style="margin-top:12px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
+        <a href="https://www.facebook.com/p/Peace-Lutheran-Church-100070387156943/" target="_blank" rel="noopener"
+          style="color:var(--primary); font-size:24px; text-decoration:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.325v21.351c0 .732.592 1.324 1.325 1.324h11.495v-9.294h-3.13v-3.622h3.13v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.794.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.764v2.311h3.587l-.467 3.622h-3.12v9.293h6.116c.732 0 1.324-.592 1.324-1.324v-21.35c0-.733-.592-1.325-1.324-1.325z" />
+          </svg>
+        </a>
+        <a href="https://www.youtube.com/@whitegandalph" target="_blank" rel="noopener"
+          style="color:var(--primary); font-size:24px; text-decoration:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M23.498 6.186a2.998 2.998 0 0 0-2.12-2.12c-1.875-.503-9.378-.503-9.378-.503s-7.503 0-9.378.503a2.998 2.998 0 0 0-2.12 2.12c-.503 1.875-.503 5.784-.503 5.784s0 3.909.503 5.784a2.998 2.998 0 0 0 2.12 2.12c1.875.503 9.378.503 9.378.503s7.503 0 9.378-.503a2.998 2.998 0 0 0 2.12-2.12c.503-1.875.503-5.784.503-5.784s0-3.909-.503-5.784zM9.545 15.568v-7.136l6.182 3.568-6.182 3.568z" />
+          </svg>
+        </a>
+        <a href="mailto:plc@peacelutheran.org" class="footer-link" style="gap:6px; display:flex; align-items:center; color:var(--primary)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 5.333-8-5.333V6h16zM4 18V8.489l8 5.333 8-5.333V18H4z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+
+    <footer>
+      <div class="footer-inner">
+        <div></div>
+        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved
+        </div>
+        <div class="footer-right">
+          <a href="https://kaiserwebdesign.net" target="_blank" rel="noopener" class="footer-link">
+            <span class="footer-built">Website by</span>
+            <img src="images/KaiserWebDesignMutedLogo.png" alt="Kaiser Web Design logo" class="footer-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <!-- Smooth scroll script + dropdown helper -->
+    <script>
+
+      (function () {
+        const imgCount = 6;                      // total number of hero images (update if you add/remove)
+        const folder = 'images/HeroImages/';
+        const format = index => folder + index + '.jpg';
+        const container = document.querySelector('.hero-image');
+        let isTransitioning = false;
+
+        if (!container) return;
+
+        const imgs = Array.from(container.querySelectorAll('.hero-img'));
+        if (imgs.length < 1) return;
+
+        // Buttons
+        const btnPrev = container.querySelector('.hero-prev');
+        const btnNext = container.querySelector('.hero-next');
+
+        // image state
+        let current = 0;                 // index in imgs array that is currently visible (0 or 1)
+        let currentImageIndex = 1;       // the actual numbered image shown (1..imgCount)
+        const transitionTime = 1000;     // match CSS transition of .hero-img
+        const displayTime = 6000;        // autoplay delay
+
+        function preload(src) { const i = new Image(); i.src = src; }
+
+        // initialize: set two alternating img elements (if available)
+        imgs[0].src = format(1);
+        if (imgs[1]) imgs[1].src = format(2);
+        preload(imgs[0].src);
+        if (imgs[1]) preload(imgs[1].src);
+
+        // Auto-advance interval (we recreate it after user interaction)
+        let autoTimer = null;
+        function startAuto() {
+          stopAuto();
+          autoTimer = setInterval(() => {
+            showNext();
+          }, displayTime);
+        }
+        function stopAuto() {
+          if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+
+        // Crossfade to a given numbered image (1..imgCount)
+        function showImageByNumber(imgNum) {
+          if (isTransitioning) return;   // 🔒 debounce
+
+          imgNum = ((imgNum - 1 + imgCount) % imgCount) + 1;
+          if (imgNum === currentImageIndex) return;
+
+          isTransitioning = true;
+
+          const outgoing = imgs[current];
+          const incoming = imgs[1 - current] || imgs[0];
+
+          // Prepare incoming image
+          incoming.classList.add('hidden');
+          incoming.src = format(imgNum);
+          preload(incoming.src);
+
+          // Force browser to register opacity:0
+          incoming.getBoundingClientRect();
+
+          // Start fade on next frame
+          requestAnimationFrame(() => {
+            incoming.classList.remove('hidden');
+            outgoing.classList.add('hidden');
+          });
+
+          setTimeout(() => {
+            current = 1 - current;
+            currentImageIndex = imgNum;
+            isTransitioning = false;     // 🔓 release debounce
+          }, transitionTime);
+        }
+
+
+        function showNext() {
+          const nextNumber = (currentImageIndex % imgCount) + 1;
+          console.log("next")
+          showImageByNumber(nextNumber);
+        }
+
+        function showPrev() {
+          const prevNumber = ((currentImageIndex - 2 + imgCount) % imgCount) + 1;
+          console.log("prev")
+          showImageByNumber(prevNumber);
+        }
+
+        // wire buttons
+        if (btnNext) btnNext.addEventListener('click', function (e) {
+          e.preventDefault();
+          showNext();
+          // restart autoplay so user has time to view
+          startAuto();
+        });
+        if (btnPrev) btnPrev.addEventListener('click', function (e) {
+          e.preventDefault();
+          showPrev();
+          startAuto();
+        });
+
+        // keyboard support: left/right arrows when hero-image has focus
+        container.tabIndex = 0;
+        container.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') { showPrev(); startAuto(); }
+          if (e.key === 'ArrowRight') { showNext(); startAuto(); }
+        });
+
+
+        // keep the earlier randomized autoplay behavior but using showImageByNumber
+        startAuto();
+        // Also still occasionally randomly switch (keeps feeling lively)
+        // Use the same interval as displayTime for simplicity
+        // (Already handled by startAuto -> showNext which cycles sequentially.)
+      })();
+
+      (function () {
+        function scrollToHash(hash) {
+          if (!hash) return;
+          var id = hash.replace('#', '');
+          var el = document.getElementById(id);
+          if (!el) return;
+          var header = document.querySelector('header');
+          var headerHeight = header ? header.getBoundingClientRect().height : 0;
+          var y = el.getBoundingClientRect().top + window.pageYOffset - Math.min(headerHeight, 20);
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest('a[href^="#"]');
+          if (a) {
+            // handle internal anchor links
+            var href = a.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              e.preventDefault();
+              history.pushState(null, '', href);
+              scrollToHash(href);
+              return;
+            }
+          }
+
+          var btn = e.target.closest('[data-scroll-target]');
+          if (btn) {
+            e.preventDefault();
+            var target = btn.getAttribute('data-scroll-target');
+            if (!target) return;
+            var hash = target.startsWith('#') ? target : '#' + target;
+            history.pushState(null, '', hash);
+            scrollToHash(hash);
+            return;
+          }
+        }, false);
+
+        // on load, if there's a hash, scroll to it smoothly
+        window.addEventListener('load', function () { if (location.hash) scrollToHash(location.hash); });
+      })();
+
+      // SCROLLING IMAGE EFFECTS...
+      (function () {
+        const wrappers = Array.from(document.querySelectorAll('.parallax'));
+        if (!wrappers.length) return;
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            }
+          });
+        }, { threshold: 0.15 });
+
+        wrappers.forEach(w => io.observe(w));
+
+        let ticking = false;
+
+        function updateParallax() {
+          const vh = window.innerHeight;
+
+          wrappers.forEach(wrapper => {
+            const img = wrapper.querySelector('img');
+            if (!img) return;
+
+            const speed = parseFloat(wrapper.dataset.speed || img.dataset.speed) || 0.12;
+            const rect = wrapper.getBoundingClientRect();
+
+            if (rect.bottom < 0 || rect.top > vh) return;
+
+            const wrapperCenter = rect.top + rect.height / 2;
+            const norm = (wrapperCenter - vh / 2) / (vh / 2 + rect.height / 2);
+
+            const imgHeight = img.offsetHeight;
+            const wrapperH = wrapper.clientHeight;
+            const extra = Math.max((imgHeight - wrapperH) / 2, 0);
+
+            const translate = Math.round(norm * extra * speed);
+            console.log(translate);
+            img.style.setProperty('--parallax', translate + 'px');
+          });
+
+          ticking = false;
+        }
+
+
+        function onScroll() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateParallax);
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', updateParallax);
+        onScroll()
+      })();
+
+      /* ---------- NEW: close dropdown when clicking outside or pressing Esc ---------- */
+      (function () {
+        document.addEventListener('click', function (e) {
+          // if click is inside a <details>, do nothing
+          const openDetails = document.querySelectorAll('nav details[open]');
+          if (!openDetails) return;
+          openDetails.forEach(d => {
+            if (!d.contains(e.target)) d.removeAttribute('open');
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            document.querySelectorAll('nav details[open]').forEach(d => d.removeAttribute('open'));
+          }
+        });
+      })();
+      const CALENDAR_ID = "plcpfld@gmail.com";
+      const API_KEY = "AIzaSyAhavTXE_EbUKi9EKoNA0S8oct4fW983GU";
+
+      const url =
+        `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events` +
+        `?key=${API_KEY}` +
+        `&singleEvents=true` +
+        `&orderBy=startTime` +
+        `&timeMin=${new Date().toISOString()}`;
+
+      // helper formatters
+      const monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'America/Chicago' });
+      const timeFormatter = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Chicago' });
+
+      // target the first calendar's <ul> (the "Upcoming Events" list)
+      const eventsList = (function () {
+        const calendars = document.querySelectorAll('.calendar');
+        if (!calendars || calendars.length === 0) return null;
+        return calendars[0].querySelector('ul'); // first .calendar -> its ul
+      })();
+
+      function formatEventStart(start) {
+        // all-day events come as start.date (YYYY-MM-DD)
+        if (start.date) {
+          // build "MMM D" manually to avoid timezone shifts
+          const [y, m, d] = start.date.split('-').map(s => parseInt(s, 10));
+          return `${monthNamesShort[m - 1]} ${d}`;
+        }
+
+        // events with a specific time: start.dateTime (ISO)
+        if (start.dateTime) {
+          const dt = new Date(start.dateTime);
+          const datePart = dateFormatter.format(dt);          // e.g. "Feb 1"
+          const timePart = timeFormatter.format(dt);          // e.g. "6:00 PM"
+          return `${datePart}, ${timePart}`;
+        }
+
+        return ''; // fallback
+      }
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error('Calendar fetch failed: ' + res.status);
+          return res.json();
+        })
+        .then(data => {
+          const events = Array.isArray(data.items) ? data.items : [];
+
+          if (!eventsList) {
+            console.warn('No .calendar ul found to insert events into.');
+            return;
+          }
+
+          // clear placeholder items (like "Parade — Dec 31")
+          eventsList.innerHTML = '';
+
+          if (events.length === 0) {
+            const li = document.createElement('li');
+            li.textContent = 'No upcoming events';
+            eventsList.appendChild(li);
+            return;
+          }
+
+          events.forEach(event => {
+            const title = event.summary || 'Untitled event';
+            const start = event.start || {};
+            const formattedStart = formatEventStart(start);
+
+            const li = document.createElement('li');
+
+            // If we have a date/time, include it after an em-dash, otherwise just the title
+            if (formattedStart) {
+              li.textContent = `${title} — ${formattedStart}`;
+            } else {
+              li.textContent = title;
+            }
+
+            eventsList.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          if (eventsList) {
+            eventsList.innerHTML = '';
+            const li = document.createElement('li');
+            li.textContent = 'Error loading events';
+            eventsList.appendChild(li);
+          }
+        });
+      const form = document.getElementById('contact-form');
+      const responseDiv = document.getElementById('form-response');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        const action = form.getAttribute('action');
+        try {
+          const res = await fetch(action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            responseDiv.style.display = 'block';
+            responseDiv.textContent = 'Thank you! Your message has been sent.';
+            form.reset();
+          } else {
+            const data = await res.json();
+            responseDiv.style.display = 'block';
+            responseDiv.textContent = data?.errors?.[0]?.message || 'Oops! There was a problem sending your message.';
+          }
+        } catch (err) {
+          responseDiv.style.display = 'block';
+          responseDiv.textContent = 'Oops! There was a problem sending your message.';
+        }
+      });
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>

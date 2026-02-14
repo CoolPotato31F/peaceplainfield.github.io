@@ -1,0 +1,21 @@
+const API_KEY = 'AIzaSyAhavTXE_EbUKi9EKoNA0S8oct4fW983GU'; // <-- REPLACE with your YouTube Data API v3 key
+      const playlistIds = [
+        'PLbuqbfCDMAE-xp_H2EKYCrwUJ-rKO6fuD', // Revelation
+        'PLbuqbfCDMAE_MWpDy1sGpvQ-_z-32ovJ_', // The Unvailed Kingdom
+        'PLbuqbfCDMAE_SGPhawImwsR3m1omXAZev', // Luke
+        'PLbuqbfCDMAE80fArN-lh00mKxM-xJgghQ', // Kindom of God
+        'PLbuqbfCDMAE-DQBK5TvsHGqnP2OTdjqv1', // The Athanasian Creed
+        'PLbuqbfCDMAE93NQkUKX8eDgIJDnN9cJWo', // End Times
+        'PLbuqbfCDMAE9TCJuil__sUWVaKe4oDWy5', // John
+        'PLbuqbfCDMAE-2pk4y8T0O95E5k_qLm-s-', // Unforgivable
+        'PLbuqbfCDMAE854bzM7kKsrCkhgISDt10P', // Hosea
+        'PLbuqbfCDMAE_bBv_hurIfDoV9Jzj5IIxc', // Peter's Letters
+        'PLbuqbfCDMAE9rgAE5lYZ5kOFzBu-deI9s', // Malachi
+        'PLbuqbfCDMAE8qySl0084Nckh_4DXQT029', // The Lord's Supper
+        'PLbuqbfCDMAE_jf-0YTZ4lg1Yc2YkzaaKh', // Nehemiah
+        'PLbuqbfCDMAE-GVM2XrEHSB2h0gZGdbkms', // Augsburg Confession
+        'PLbuqbfCDMAE9cdFnbNgEbyrQqHn_TBttX', // Job
+        'PLbuqbfCDMAE_TeQsgXR-qBWe0Mex0SyHS', // Song Of Songs
+        'PLbuqbfCDMAE_Rb3QiyePAuDx9AVGSJLPl', // Exodus
+        
+      ];

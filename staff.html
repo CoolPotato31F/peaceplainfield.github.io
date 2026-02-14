@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peace Lutheran — Staff</title>
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <style>
+    :root{
+      --primary: #0D348F; /* rgb(13,52,143) */
+      --accent-gold: #F2C94C;
+      --accent-light: #0D7BEF;
+      --muted: #6B7280;
+      --bg: #F7F9FC;
+      --card:#FFFFFF;
+      --radius:4px;
+      --max-width:1100px;
+      --container-pad:20px;
+      --shadow: 0 6px 20px rgba(13,52,143,0.08);
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111}
+    .wrap{max-width:var(--max-width);margin:28px auto;padding:0 var(--container-pad)}
+
+    /* Header *//* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    nav {
+      display: flex;
+      align-items: center
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- NEW: dropdown nav styles ---------- */
+    /* Use details/summary for accessible dropdown */
+    nav details {
+      position: relative;
+      margin-left: 18px;
+    }
+
+    nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+
+    /* remove default marker */
+    nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* simple caret */
+    nav summary::after {
+      content: " ▾";
+      font-size: 0.9em;
+      color: var(--primary);
+      margin-left: 6px;
+      transition: transform 160ms ease;
+      display: inline-block;
+    }
+
+    nav details[open] summary::after {
+      transform: rotate(-180deg);
+    }
+
+    /* dropdown menu */
+    nav details>ul {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      padding: 8px 6px;
+      min-width: 180px;
+      z-index: 100;
+      margin: 0;
+      list-style: none;
+    }
+
+    nav details>ul li {
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    nav details>ul li a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav details>ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:18px;align-items:center}
+    .hero-card{background:var(--card);border-radius:6px;padding:28px;box-shadow:var(--shadow)}
+    .eyebrow{color:var(--muted);font-weight:700}
+    h1{margin:10px 0 6px;font-size:34px;color:var(--primary)}
+    p.lead{color:#333;font-size:16px;line-height:1.5}
+    .ctas{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:12px 18px;border-radius:3px;font-weight:700;cursor:pointer;border:0}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-ghost{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+
+    /* Right column: image placeholder and quick info */
+    .hero-side{display:flex;flex-direction:column;gap:12px}
+    .hero-image{height:220px;border-radius:4px;background:linear-gradient(180deg,var(--primary),var(--accent-light));display:flex;align-items:center;justify-content:center;color:white;font-size:18px}
+    .quick{display:flex;flex-direction:column;gap:8px}
+    .quick .item{background:var(--bg);padding:12px;border-radius:3px}
+
+    /* Sections */
+    section{margin-top:28px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);border-radius:4px;padding:18px;box-shadow:var(--shadow)}
+
+
+    /* Staff grid */
+    .staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .staff{background:var(--card);padding:18px;border-radius:4px;text-align:center}
+    .staff img{width:140px;height:140px;object-fit:cover;border-radius:50%;margin:0 auto 10px;display:block;border:3px solid var(--primary)}
+    .staff h4{margin:6px 0 2px;font-size:18px}
+    .staff .role{font-weight:700;color:var(--primary);font-size:14px}
+    .staff .desc{margin-top:6px;font-size:14px;color:var(--muted);line-height:1.4}
+
+    /* Calendar */
+    .calendar-wrap{display:flex;gap:18px}
+    .calendar{flex:1;background:var(--card);padding:12px;border-radius:4px}
+    .cal-embed{height:360px;border-radius:2px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+
+    /* Footer */
+    footer{margin-top:36px;padding:20px 0;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr;}
+      .cards{grid-template-columns:1fr}
+      .staff-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:520px){
+      .staff-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img class="logo" src="images/logo.png" alt="Peace Lutheran logo">
+        <div>
+          <div style="font-weight:800;color:var(--primary)">Peace Lutheran</div>
+          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
+        <a href="#devotion">Daily Devotion</a>
+        <a href="#events">Calendar</a>
+        <a href="staff.html">Staff</a>
+
+        <!-- NEW: Other dropdown -->
+        <details>
+          <summary>Other</summary>
+          <ul>
+            <li><a href="bible-studies.html">Bible Studies</a></li>
+            <li><a href="sermons.html">Sermons</a></li>
+          </ul>
+        </details>
+      </nav>
+    </header>
+
+    <!-- STAFF & LEADERSHIP -->
+    <section id="staff">
+      <h2 style="color:var(--primary)">Staff & Leadership</h2>
+      <div class="staff-grid" style="margin-top:12px">
+        <div class="staff">
+          <img src="images/staff-pastor.jpg" alt="Peace Lutheran Pastor Balla" />
+          <h4>David Balla</h4>
+          <div class="role">Pastor</div>
+          <div class="desc">Preaches the Word, administers the Sacraments, and provides spiritual care and leadership for the congregation.</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-head_elder.jpg" alt="Peace Lutheran Head Elder" />
+          <h4>Donovan Fechner</h4>
+          <div class="role">Head Elder</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-secretary.jpg" alt="Peace Lutheran Elder" />
+          <h4>Name</h4>
+          <div class="role">Church Secretary</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-elder-3.jpg" alt="Peace Lutheran Organist" />
+          <h4>Rob Metzger</h4>
+          <div class="role">Elder</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-elder-2.jpg" alt="Peace Lutheran Elder" />
+          <h4>Craig Pape</h4>
+          <div class="role">Elder</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-elder-1.jpg" alt="Peace Lutheran Elder" />
+          <h4>Kai Lidke</h4>
+          <div class="role">Elder</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-organist.jpg" alt="Peace Lutheran Organist" />
+          <h4>Name</h4>
+          <div class="role">Organist</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-praise-band.jpg" alt="Peace Lutheran Praise Band" />
+          <h4>Praise Band</h4>
+          <div class="role">Church Band</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-trustee.jpg" alt="Peace Lutheran Trustee" />
+          <h4>Jo Lynn Worden</h4>
+          <div class="role">Trustee</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-accounting-board-member.jpg" alt="Peace Lutheran Accounting Board Member" />
+          <h4>Adam Bennett</h4>
+          <div class="role">Accounting Board Member</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-accounting-board-member.jpg" alt="Peace Lutheran Accounting Board Member" />
+          <h4>Dan Bodner</h4>
+          <div class="role">Accounting Board Member</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-financial-secretary.jpg" alt="Peace Lutheran Financial Secretary" />
+          <h4>Debbie Judd</h4>
+          <div class="role">Financial Secretary</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-recording-secretary.jpg" alt="Peace Lutheran Recording Secretary" />
+          <h4>Ellie Rubach</h4>
+          <div class="role">Recording Secretary</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-treasurer.jpg" alt="Peace Lutheran Treasurer" />
+          <h4>Mark Pocius</h4>
+          <div class="role">Treasurer</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-evangelism-board-member.jpg" alt="Peace Lutheran Evangelism Board Member" />
+          <h4>Brandi Pocius</h4>
+          <div class="role">Evangelism Board Member</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-evangelism-board-member.jpg" alt="Peace Lutheran Evangelism Board Member" />
+          <h4>April Kundid.</h4>
+          <div class="role">Evangelism Board Member</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+        <div class="staff">
+          <img src="images/staff-evangelism-board-member.jpg" alt="Peace Lutheran Evangelism Board Member" />
+          <h4>Lori Hayman</h4>
+          <div class="role">Evangelism Board Member</div>
+          <div class="desc">(placeholder)</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year">2026</span> Peace Lutheran Church — All rights reserved</div>
+    </footer>
+
+  <script>
+    // Small helpers and notes for maintainers
+    // -- Replace hero and staff image files in /images/ and keep consistent sizing.
+    // -- To hook up Google Calendar: replace the cal-embed div with an iframe to your calendar (instructions in the HTML comments above).
+    // -- Replace 'Give Online' button link with your provider's donation URL.
+    // -- Accessibility: add alt text to every image and ensure button text describes destination.
+  </script>
+</body>
+</html>
