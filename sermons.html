@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Peace Lutheran — Sermons</title>
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <style>
-    :root{
+    :root {
       --primary: #0D348F;
       --accent-light: #0D7BEF;
       --muted: #6B7280;
@@ -14,95 +15,253 @@
       --card: #fff;
       --container-pad: 20px;
       --max-width: 1100px;
-      --shadow: 0 6px 20px rgba(13,52,143,0.08);
+      --shadow: 0 6px 20px rgba(13, 52, 143, 0.08);
       --radius: 6px;
       font-family: Georgia, "Times New Roman", Times, serif;
     }
 
     /* Reset / base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:#111;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 
       /* make page a column so footer can sit at bottom */
-      display:flex;
-      flex-direction:column;
-      min-height:100vh;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* page container */
-    .wrap{
-      width:100%;
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:28px var(--container-pad);
-      display:flex;
-      flex-direction:column;
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px var(--container-pad);
+      display: flex;
+      flex-direction: column;
       /* this makes the main content area take remaining space */
-      flex:1 0 auto;
-      gap:18px;
+      flex: 1 0 auto;
+      gap: 18px;
     }
 
     /* make header, page content, footer structured */
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:56px;display:block}
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--primary);text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    nav {
+      display: flex;
+      align-items: center
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- NEW: dropdown nav styles ---------- */
+    /* Use details/summary for accessible dropdown */
+    nav details {
+      position: relative;
+      margin-left: 18px;
+    }
+
+
+    nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+
+    /* remove default marker */
+    nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* simple caret */
+    nav summary::after {
+      content: " ▾";
+      font-size: 0.9em;
+      color: var(--primary);
+      margin-left: 6px;
+      transition: transform 160ms ease;
+      display: inline-block;
+    }
+
+    nav details[open] summary::after {
+      transform: rotate(-180deg);
+    }
+
+
+    /* dropdown menu */
+    nav details>ul {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      padding: 8px 6px;
+      min-width: 180px;
+      z-index: 100;
+      margin: 0;
+      list-style: none;
+    }
+
+    nav details>ul li {
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    nav details>ul li a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav details>ul li a:hover {
+      text-decoration: underline;
+    }
 
     /* main content should grow so footer is pushed down */
-    main.content{flex:1 1 auto; display:block}
+    main.content {
+      flex: 1 1 auto;
+      display: block
+    }
 
     /* simple hero */
-    .bible-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px}
-    .bible-hero h1{margin:10 0 6px;color:var(--primary);font-size:28px}
+    .bible-hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 18px
+    }
+
+    .bible-hero h1 {
+      margin: 10 0 6px;
+      color: var(--primary);
+      font-size: 28px
+    }
 
     /* video area */
     .video-wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     /* footer */
-    footer{
+    footer {
       /* ensure footer doesn't float up: margin-top:auto when using flex children,
          but since .wrap is the flex child and contains footer, we use .wrap flex above
          and let footer be natural; still give footer spacing and background */
-      padding:18px 0;
+      padding: 18px 0;
       /* optional: keep footer visually separated */
-      border-top:1px solid #eee;
-      background:transparent;
+      border-top: 1px solid #eee;
+      background: transparent;
     }
 
-    .footer-inner{
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      align-items:center;
-      gap:12px;
-      padding:0 var(--container-pad);
-      max-width:100%;
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--container-pad);
+      max-width: 100%;
     }
-    .footer-center{justify-self:center;color:var(--muted);font-size:13px}
-    .footer-right{justify-self:end}
-    .footer-link{display:flex;gap:8px;align-items:center;text-decoration:none;color:inherit}
-    .footer-logo{height:28px;opacity:.8;transition:transform .16s,opacity .16s}
-    .footer-link:hover .footer-logo{opacity:1;transform:translateY(-1px)}
+
+    .footer-center {
+      justify-self: center;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .footer-right {
+      justify-self: end
+    }
+
+    .footer-link {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      text-decoration: none;
+      color: inherit
+    }
+
+    .footer-logo {
+      height: 28px;
+      opacity: .8;
+      transition: transform .16s, opacity .16s
+    }
+
+    .footer-link:hover .footer-logo {
+      opacity: 1;
+      transform: translateY(-1px)
+    }
 
     /* responsive tweaks */
-    @media (max-width:920px){
-      .bible-hero{flex-direction:column;align-items:flex-start;gap:8px}
-      .footer-inner{grid-template-columns:1fr; text-align:center}
-      .footer-right{justify-self:center}
+    @media (max-width:920px) {
+      .bible-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+
+      .footer-right {
+        justify-self: center
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <header>
@@ -113,17 +272,17 @@
           <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation</div>
         </div>
       </div>
-
       <nav>
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
-        <a href="index#devotion">Daily Devotion</a>
-        <a href="index#events">Calendar</a>
+        <a href="index.html#devotion">Daily Devotion</a>
+        <a href="index.html#events">Calendar</a>
         <a href="staff.html">Staff</a>
 
+        <!-- NEW: Other dropdown -->
         <details>
-          <summary style="cursor:pointer;font-weight:600;color:var(--primary);list-style:none">Other ▾</summary>
-          <ul style="padding:8px 6px;margin:8px 0;background:var(--card);box-shadow:var(--shadow);border-radius:6px;list-style:none">
+          <summary>Other</summary>
+          <ul>
             <li style="padding:6px 0"><a href="bible-studies.html">Bible Studies</a></li>
             <li style="padding:6px 0"><a href="sermons.html">Sermons</a></li>
             <li style="padding:6px 0"><a href="yoga.html">Yoga</a></li>
@@ -132,19 +291,22 @@
       </nav>
     </header>
 
+
     <main class="content">
       <div class="bible-hero">
-        <div><h1>Sermons</h1></div>
+        <div>
+          <h1>Sermons</h1>
+        </div>
         <div class="bible-controls" aria-hidden="false"></div>
       </div>
 
       <section id="bible-studies" class="bible-wrap" aria-live="polite">
         <div class="video-wrap">
-            <iframe width="627" height="352"
-                    src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE_rNcOvWSrPG0zUoA2QaO5H"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="627" height="352"
+            src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE_rNcOvWSrPG0zUoA2QaO5H"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </section>
     </main>
@@ -168,4 +330,5 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>

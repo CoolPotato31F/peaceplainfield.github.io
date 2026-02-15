@@ -1,18 +1,19 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Staff Slide — Peace Lutheran</title>
   <style>
-    :root{
+    :root {
       --primary: #0D348F;
       --accent-gold: #F2C94C;
       --bg: #F7F9FC;
       --muted: #6B7280;
-      --overlay: rgba(13,52,143,0.42);
-      --overlay-strong: rgba(13,52,143,0.66);
+      --overlay: rgba(13, 52, 143, 0.42);
+      --overlay-strong: rgba(13, 52, 143, 0.66);
       --white: #fff;
       --max-width: 1600px;
       --pad: 48px;
@@ -21,194 +22,226 @@
     }
 
     /* Full-bleed, fixed layout for TV (landscape) */
-    html,body{
-      height:100%;
-      margin:0;
-      background:var(--bg);
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
       font-family: var(--font-serif);
-      color:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Slide container covers the viewport */
-    .slide{
-      position:relative;
-      width:100vw;
-      height:100vh;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+    .slide {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       background: #000;
     }
 
     /* Background image (covers, centered) */
-    .slide .bg{
-      position:absolute;
-      inset:0;
-      background-position:center center;
-      background-size:cover;
+    .slide .bg {
+      position: absolute;
+      inset: 0;
+      background-position: center center;
+      background-size: cover;
       filter: saturate(0.96) contrast(0.9);
       transform: scale(1.03);
       will-change: transform, filter;
     }
 
-    .slide.kb .bg{
+    .slide.kb .bg {
       transition: transform 16s linear;
       transform-origin: center center;
     }
 
-    .slide.kb.playing .bg{ transform: scale(1.08) translateY(-2%); }
+    .slide.kb.playing .bg {
+      transform: scale(1.08) translateY(-2%);
+    }
 
-    .overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(13,52,143,0.18) 45%, rgba(0,0,0,0.55) 100%);
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(13, 52, 143, 0.18) 45%, rgba(0, 0, 0, 0.55) 100%);
       mix-blend-mode: normal;
     }
 
-    .content{
-      position:relative;
+    .content {
+      position: relative;
       z-index: 20;
       width: min(1100px, calc(100% - 160px));
       padding: 48px;
       box-sizing: border-box;
-      display:flex;
-      gap:28px;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      text-shadow: 0 6px 22px rgba(2,6,23,0.6);
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-shadow: 0 6px 22px rgba(2, 6, 23, 0.6);
     }
 
-    .portrait{
+    .portrait {
       width: 420px;
       height: 420px;
       flex: 0 0 420px;
       border-radius: 10px;
-      overflow:hidden;
-      box-shadow: 0 18px 50px rgba(2,6,23,0.6);
-      border: 6px solid rgba(255,255,255,0.06);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      display:block;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(2, 6, 23, 0.6);
+      border: 6px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      display: block;
     }
 
-    .portrait img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform:scale(1.01);
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
     }
 
     /* text block */
-    .meta{
-      color:var(--white);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-      max-width:720px;
+    .meta {
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      max-width: 720px;
     }
 
-    .name{
-      font-size:72px;
-      line-height:0.95;
-      margin:0;
-      font-weight:800;
+    .name {
+      font-size: 72px;
+      line-height: 0.95;
+      margin: 0;
+      font-weight: 800;
       letter-spacing: -0.02em;
-      color:var(--white);
+      color: var(--white);
       font-family: var(--font-serif);
     }
 
-    .role{
-      font-size:28px;
-      margin:0;
-      color:var(--accent-gold);
-      font-weight:700;
+    .role {
+      font-size: 28px;
+      margin: 0;
+      color: var(--accent-gold);
+      font-weight: 700;
       text-transform: none;
       letter-spacing: 0.02em;
     }
 
-    .desc{
-      font-size:20px;
-      color: rgba(255,255,255,0.92);
-      margin-top:18px;
-      line-height:1.45;
-      max-width:900px;
+    .desc {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.92);
+      margin-top: 18px;
+      line-height: 1.45;
+      max-width: 900px;
     }
 
-    .brand{
-      position:absolute;
-      top:24px;
-      left:28px;
-      z-index:30;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      color:rgba(255,255,255,0.9);
-      font-weight:700;
-      font-family:var(--font-sans);
-      text-shadow:none;
-      font-size:18px;
+    .brand {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      z-index: 30;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 700;
+      font-family: var(--font-sans);
+      text-shadow: none;
+      font-size: 18px;
     }
 
-    .brand img{ height:34px; width:auto; opacity:0.95 }
-
-    .caption{
-      position:absolute;
-      bottom:20px;
-      left:50%;
-      transform:translateX(-50%);
-      z-index:30;
-      color: rgba(255,255,255,0.75);
-      font-family:var(--font-sans);
-      font-size:14px;
+    .brand img {
+      height: 34px;
+      width: auto;
+      opacity: 0.95
     }
 
-.fade-wrap{
-  transition: opacity 0.9s ease, transform 0.9s ease;
-  opacity: 1;
-}
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      color: rgba(255, 255, 255, 0.75);
+      font-family: var(--font-sans);
+      font-size: 14px;
+    }
 
-.fade-out{
-  opacity: 0;
-  transform: scale(1.04);
-}
+    .fade-wrap {
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      opacity: 1;
+    }
 
-.fade-in{
-  opacity: 1;
-  transform: scale(1);
-}
+    .fade-out {
+      opacity: 0;
+      transform: scale(1.04);
+    }
 
-.portrait img{
-  transition: opacity 0.6s ease;
-}
+    .fade-in {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-.name, .role, .desc{
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+    .portrait img {
+      transition: opacity 0.6s ease;
+    }
+
+    .name,
+    .role,
+    .desc {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
 
     @media (max-height:720px) {
-      .portrait{ width:300px; height:300px; flex-basis:300px }
-      .name{ font-size:56px }
-      .role{ font-size:22px }
-      .desc{ font-size:18px }
+      .portrait {
+        width: 300px;
+        height: 300px;
+        flex-basis: 300px
+      }
+
+      .name {
+        font-size: 56px
+      }
+
+      .role {
+        font-size: 22px
+      }
+
+      .desc {
+        font-size: 18px
+      }
     }
 
-    @media (min-aspect-ratio: 16/9) and (max-width:1400px){
-      .content{ width: calc(100% - 120px) }
+    @media (min-aspect-ratio: 16/9) and (max-width:1400px) {
+      .content {
+        width: calc(100% - 120px)
+      }
     }
 
-    .slide.no-portrait .content{ gap:12px }
-    .slide.no-portrait .portrait{ display:none }
-    .slide.no-portrait .name{ font-size:98px }
+    .slide.no-portrait .content {
+      gap: 12px
+    }
 
+    .slide.no-portrait .portrait {
+      display: none
+    }
+
+    .slide.no-portrait .name {
+      font-size: 98px
+    }
   </style>
 </head>
+
 <body>
 
   <div class="slide kb playing" id="slide">
@@ -216,7 +249,7 @@
     <div class="overlay" aria-hidden="true"></div>
 
     <div class="brand" aria-hidden="true">
-      <img src="images/logo.png" alt="" id="brandLogo" style="display:none"> 
+      <img src="images/logo.png" alt="" id="brandLogo" style="display:none">
       <div>Peace Lutheran</div>
     </div>
 
@@ -228,7 +261,8 @@
       <div class="meta">
         <h1 class="name" id="nameEl">Name Placeholder</h1>
         <div class="role" id="roleEl">Role Placeholder</div>
-        <div class="desc" id="descEl">Short role description or biography goes here. Keep it concise — this text will be displayed prominently on a TV and should be easy to read from a distance.</div>
+        <div class="desc" id="descEl">Short role description or biography goes here. Keep it concise — this text will be
+          displayed prominently on a TV and should be easy to read from a distance.</div>
       </div>
     </div>
 
@@ -236,79 +270,80 @@
   </div>
 
   <script>
-/* ===============================
-   STAFF TABLE (EDIT HERE ONLY)
-================================= */
-const staffTable = [
-  {
-    image: "images/staff-pastor.jpg",
-    name: "David Balla",
-    role: "Pastor",
-    description: "Preaches the Word, administers the Sacraments, and provides spiritual care and leadership for the congregation."
-  },
-  {
-    image: "images/staff-head_elder.jpg",
-    name: "Donovan Fechner",
-    role: "Head Elder",
-    description: "Supports the pastor and congregation through leadership and spiritual care."
-  },
-  {
-    image: "images/staff-elder-3.jpg",
-    name: "Rob Metzger",
-    role: "Elder",
-    description: "Assists in worship services and congregational care."
-  },
-  {
-    image: "images/staff-organist.jpg",
-    name: "Name Here",
-    role: "Organist",
-    description: "Leads music and supports worship each week."
-  }
-];
+    /* ===============================
+       STAFF TABLE (EDIT HERE ONLY)
+    ================================= */
+    const staffTable = [
+      {
+        image: "images/staff-pastor.jpg",
+        name: "David Balla",
+        role: "Pastor",
+        description: "Preaches the Word, administers the Sacraments, and provides spiritual care and leadership for the congregation."
+      },
+      {
+        image: "images/staff-head_elder.jpg",
+        name: "Donovan Fechner",
+        role: "Head Elder",
+        description: "Supports the pastor and congregation through leadership and spiritual care."
+      },
+      {
+        image: "images/staff-elder-3.jpg",
+        name: "Rob Metzger",
+        role: "Elder",
+        description: "Assists in worship services and congregational care."
+      },
+      {
+        image: "images/staff-organist.jpg",
+        name: "Name Here",
+        role: "Organist",
+        description: "Leads music and supports worship each week."
+      }
+    ];
 
-const portraitImg = document.getElementById('portraitImg');
-const nameEl = document.getElementById('nameEl');
-const roleEl = document.getElementById('roleEl');
-const descEl = document.getElementById('descEl');
-const slide = document.getElementById('slide');
+    const portraitImg = document.getElementById('portraitImg');
+    const nameEl = document.getElementById('nameEl');
+    const roleEl = document.getElementById('roleEl');
+    const descEl = document.getElementById('descEl');
+    const slide = document.getElementById('slide');
 
-let index = 0;
-let transitioning = false;
+    let index = 0;
+    let transitioning = false;
 
-function setContent(s){
-  portraitImg.src = s.image;
-  portraitImg.alt = s.name;
-  nameEl.textContent = s.name;
-  roleEl.textContent = s.role;
-  descEl.textContent = s.description;
-}
+    function setContent(s) {
+      portraitImg.src = s.image;
+      portraitImg.alt = s.name;
+      nameEl.textContent = s.name;
+      roleEl.textContent = s.role;
+      descEl.textContent = s.description;
+    }
 
-function transitionToNext(){
-  if(transitioning) return;
-  transitioning = true;
+    function transitionToNext() {
+      if (transitioning) return;
+      transitioning = true;
 
-  slide.classList.add("fade-out");
+      slide.classList.add("fade-out");
 
-  setTimeout(()=>{
-    index = (index + 1) % staffTable.length;
+      setTimeout(() => {
+        index = (index + 1) % staffTable.length;
+        setContent(staffTable[index]);
+
+        slide.classList.remove("fade-out");
+        slide.classList.add("fade-in");
+
+        setTimeout(() => {
+          slide.classList.remove("fade-in");
+          transitioning = false;
+        }, 900);
+
+      }, 900);
+    }
+
     setContent(staffTable[index]);
 
-    slide.classList.remove("fade-out");
-    slide.classList.add("fade-in");
-
-    setTimeout(()=>{
-      slide.classList.remove("fade-in");
-      transitioning = false;
-    }, 900);
-
-  }, 900);
-}
-
-setContent(staffTable[index]);
-
-setInterval(transitionToNext, 12000);
-</script>
+    setInterval(transitionToNext, 12000);
+  </script>
 
 
 </body>
+
 </html>
