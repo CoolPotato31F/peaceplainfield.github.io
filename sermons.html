@@ -193,6 +193,69 @@
       align-items: center;
     }
 
+    /* Podcast section */
+    .podcast-section {
+      max-width: 720px;
+      margin: 70px auto 0;
+      text-align: center;
+      background: white;
+      padding: 45px 40px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .podcast-section h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .podcast-section p {
+      color: #333;
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+
+    /* button layout */
+    .podcast-buttons {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* base button */
+    .podcast-btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: .2s;
+      color: white;
+    }
+
+    /* Spotify */
+    .podcast-btn.spotify {
+      background: #1DB954;
+    }
+
+    .podcast-btn.spotify:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    /* Buzzsprout */
+    .podcast-btn.buzzsprout {
+      background: var(--primary);
+    }
+
+    .podcast-btn.buzzsprout:hover {
+      transform: translateY(-2px);
+      background: var(--accent-light);
+    }
+
+
     /* footer */
     footer {
       /* ensure footer doesn't float up: margin-top:auto when using flex children,
@@ -300,7 +363,7 @@
         <div class="bible-controls" aria-hidden="false"></div>
       </div>
 
-      <section id="bible-studies" class="bible-wrap" aria-live="polite">
+      <section id="sermon" class="bible-wrap" aria-live="polite">
         <div class="video-wrap">
           <iframe width="627" height="352"
             src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE_rNcOvWSrPG0zUoA2QaO5H"
@@ -309,6 +372,25 @@
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </section>
+      <!-- Podcast section -->
+      <section class="podcast-section">
+        <h2>Listen to Our Podcast</h2>
+        <p>
+          Stay connected throughout the week by listening to our sermons on Spotify or Buzzsprout.
+        </p>
+
+        <div class="podcast-buttons">
+          <a class="podcast-btn spotify" href="https://open.spotify.com/show/6leqzVzYNmgnV5qfEKouA2" target="_blank"
+            rel="noopener">
+            Listen on Spotify
+          </a>
+
+          <a class="podcast-btn buzzsprout" href="https://www.buzzsprout.com/264951" target="_blank" rel="noopener">
+            Listen on Buzzsprout
+          </a>
+        </div>
+      </section>
+
     </main>
 
     <footer>
