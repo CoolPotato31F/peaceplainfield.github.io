@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peace Lutheran — Yoga</title>
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+  <style>
+    :root{
+      --primary: #0D348F;
+      --accent-light: #0D7BEF;
+      --muted: #6B7280;
+      --bg: #F7F9FC;
+      --card: #fff;
+      --container-pad: 20px;
+      --max-width: 1100px;
+      --shadow: 0 6px 20px rgba(13,52,143,0.08);
+      --radius: 6px;
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    /* Reset / base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+
+      /* make page a column so footer can sit at bottom */
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    /* page container */
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:28px var(--container-pad);
+      display:flex;
+      flex-direction:column;
+      /* this makes the main content area take remaining space */
+      flex:1 0 auto;
+      gap:18px;
+    }
+
+    /* make header, page content, footer structured */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;display:block}
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--primary);text-decoration:none;font-weight:600}
+    nav a:hover{text-decoration:underline}
+    nav a.active{background:var(--primary);color:#fff;padding:8px 12px;border-radius:6px}
+
+    /* main content should grow so footer is pushed down */
+    main.content{flex:1 1 auto; display:block}
+
+    /* simple hero */
+    .bible-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px}
+    .bible-hero h1{margin:10 0 6px;color:var(--primary);font-size:28px}
+
+    /* content layout */
+    .columns{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+    .card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .lede{font-size:16px;line-height:1.6;color:#222}
+    .section-title{font-weight:700;color:var(--primary);margin-top:8px;margin-bottom:8px}
+
+    /* responsive */
+    .media img{width:100%;height:auto;border-radius:6px;display:block}
+    .meta{font-size:14px;color:var(--muted);margin-bottom:10px}
+
+    @media (max-width:920px){
+      .bible-hero{flex-direction:column;align-items:flex-start;gap:8px}
+      .footer-inner{grid-template-columns:1fr; text-align:center}
+      .footer-right{justify-self:center}
+      .columns{grid-template-columns:1fr;gap:16px}
+    }
+
+    /* video */
+    .video-wrap {display:flex;justify-content:center;align-items:center;margin-top:12px}
+    iframe{border-radius:6px;max-width:100%}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="document">
+    <header>
+      <div class="brand" itemscope itemtype="http://schema.org/Organization">
+        <img class="logo" src="images/logo.png" alt="Peace Lutheran logo" />
+        <div>
+          <div style="font-weight:800;color:var(--primary)">Peace Lutheran</div>
+          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation — Plainfield, IL</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7" target="_blank" rel="noopener">Visit</a>
+        <a href="#devotion">Daily Devotion</a>
+        <a href="#events">Calendar</a>
+        <a href="staff.html">Staff</a>
+        <a href="yoga.html" class="active" aria-current="page">Yoga</a>
+
+        <details>
+          <summary style="cursor:pointer;font-weight:600;color:var(--primary);list-style:none">Other ▾</summary>
+          <ul style="padding:8px 6px;margin:8px 0;background:var(--card);box-shadow:var(--shadow);border-radius:6px;list-style:none">
+            <li style="padding:6px 0"><a href="bible-studies.html">Bible Studies</a></li>
+            <li style="padding:6px 0"><a href="sermons.html">Sermons</a></li>
+            <li style="padding:6px 0"><a href="yoga.html">Yoga</a></li>
+          </ul>
+        </details>
+      </nav>
+    </header>
+
+    <main class="content" id="site-content" role="main">
+      <div class="bible-hero" role="region" aria-labelledby="page-title">
+        <div>
+          <h1 id="page-title">Christian Yoga</h1>
+          <div class="meta">Thursdays • 7:00 PM — Lower Level • No cost, no registration</div>
+        </div>
+        <div class="bible-controls" aria-hidden="false"></div>
+      </div>
+
+      <div class="columns" aria-live="polite">
+        <!-- main column -->
+        <article class="card" role="article" aria-labelledby="why-title">
+          <h2 id="why-title" class="section-title">Why We Use Guided Meditation</h2>
+          <p class="lede">
+            At the end of our <strong>Christian yoga class</strong>, we incorporate <strong>guided meditation</strong> during
+            <strong>Savasana (Corpse Pose)</strong> to create a sacred space for <strong>deep rest, reflection, and connection with God.</strong>
+            After engaging our bodies in movement, we intentionally quiet our minds and hearts, focusing on Scripture and God’s presence.
+            This time of stillness allows us to fully surrender our worries, release tension, and receive the <strong>peace of Christ.</strong>
+          </p>
+
+          <h3 class="section-title">A Christ-centered Practice</h3>
+          <p class="lede">
+            Unlike secular meditation, our practice is rooted in <strong>God’s Word</strong>, directing our thoughts toward
+            <strong>His truth, His promises, and His sustaining grace.</strong> As we rest, we reflect on Scripture, breathe deeply in His presence,
+            and trust in His provision—allowing our faith to be nourished just as our bodies have been strengthened.
+          </p>
+
+          <figure class="media" aria-hidden="false">
+            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-elina-fairytale-3822191-1024x683.jpg" alt="People in a calm yoga class" />
+          </figure>
+
+          <h3 class="section-title">Join Us</h3>
+          <p class="lede">
+            Whether after yoga or in any quiet moment, this guided meditation offers a <strong>Christ-centered way to rest, renew, and restore your soul.</strong>
+            The class is beginner-friendly (Hatha) and meets each Thursday evening. No cost, no registration — bring a mat and a heart ready to be still.
+          </p>
+
+          <h3 class="section-title">Scripture & Practice</h3>
+          <p class="lede">
+            We weave Scripture into practice — breathing with awareness, moving in asana, and closing in meditation.
+            Psalm 46:10 (ESV): <em>“Be still, and know that I am God…”</em>
+          </p>
+
+          <div style="height:12px"></div>
+
+          <h3 class="section-title">Breath</h3>
+          <p class="lede">
+            Each practice begins with a few minutes of focused attention on our breath; inhaling and exhaling fully.
+            Job 33:4 (ESV): <em>“The Spirit of God has made me, and the breath of the Almighty gives me life.”</em>
+            In the Bible the word for breath is the same word as Spirit — a fitting reminder that our breathing practice connects us to God’s life within us.
+          </p>
+
+          <figure class="media" aria-hidden="false">
+            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-cliff-booth-4056724-1024x683.jpg" alt="Close-up of calm breathing" />
+          </figure>
+
+          <h3 class="section-title">Asana</h3>
+          <p class="lede">
+            Asana means "pose." We use gentle Hatha sequences (Savasana, Bharmanasana, standing and seated poses) to strengthen, lengthen, and release tension.
+            Flexibility grows with practice — you don't need to be "flexible" to begin.
+          </p>
+
+          <figure class="media" aria-hidden="false">
+            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-ekaterina-bolovtsova-4051574-1024x683.jpg" alt="Group practicing gentle yoga" />
+          </figure>
+
+          <h3 class="section-title">Meditation</h3>
+          <p class="lede">
+            After movement and breath we settle into meditation — usually in Savasana — listening to Scripture, receiving God's peace, and sitting quietly with the Lord.
+            Exodus 14:14 (ESV): <em>“The LORD will fight for you, and you have only to be silent.”</em>
+          </p>
+
+          <h3 class="section-title">Teacher</h3>
+          <p class="lede">
+            <strong>David Balla</strong> — Registered Yoga Teacher (RYT 200) with Yoga Alliance and pastor of Peace Lutheran Church.
+            David blends theological grounding with gentle, accessible movement and invites prayerful reflection in every class.
+          </p>
+
+          <div class="video-wrap" aria-hidden="false">
+            <iframe width="627" height="352"
+                    src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE9WPu5F5Vv94pqtvPP5CqbE"
+                    title="Guided Meditation playlist" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </article>
+
+        <!-- sidebar -->
+        <aside class="card" aria-labelledby="join-title">
+          <h2 id="join-title" class="section-title">Class Info</h2>
+          <p class="meta"><strong>When:</strong> Thursdays • 7:00 PM</p>
+          <p class="meta"><strong>Where:</strong> Peace Lutheran — Lower Level (24024 West Main St.)</p>
+          <p class="meta"><strong>Cost:</strong> Free</p>
+
+          <hr style="border:none;height:1px;background:#eee;margin:12px 0;border-radius:2px" />
+
+          <h3 class="section-title" style="font-size:15px">What to Bring</h3>
+          <ul style="margin:0 0 12px 18px;color:#333;line-height:1.5">
+            <li>Yoga mat (we have some available)</li>
+            <li>Water bottle</li>
+            <li>Comfortable clothing</li>
+          </ul>
+
+          <h3 class="section-title" style="font-size:15px">Contact</h3>
+          <p class="lede">Questions? <a href="mailto:office@peaceplainfield.org">office@peaceplainfield.org</a></p>
+
+          <hr style="border:none;height:1px;background:#eee;margin:12px 0;border-radius:2px" />
+
+          <h3 class="section-title" style="font-size:15px">More</h3>
+          <ul style="margin:0 0 0 18px;color:#333;line-height:1.6">
+            <li><a href="bible-studies.html">Bible Studies</a></li>
+            <li><a href="sermons.html">Sermons</a></li>
+            <li><a href="contact-us.html">Contact Us</a></li>
+          </ul>
+        </aside>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-inner" style="max-width:var(--max-width);margin:0 auto;">
+        <div></div>
+        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved</div>
+        <div class="footer-right">
+          <a href="https://kaiserwebdesign.net" target="_blank" rel="noopener" class="footer-link">
+            <span class="footer-built">Website by</span>
+            <img src="images/KaiserWebDesignMutedLogo.png" alt="Kaiser Web Design logo" class="footer-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // keep year current
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
