@@ -182,6 +182,7 @@
 </head>
 <body>
   <div class="wrap">
+    
     <header>
       <div class="brand">
         <img class="logo" src="images/logo.png" alt="Peace Lutheran logo">
@@ -191,7 +192,7 @@
         </div>
       </div>
       <nav>
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
         <a href="#devotion">Daily Devotion</a>
         <a href="#events">Calendar</a>
@@ -203,6 +204,7 @@
           <ul>
             <li><a href="bible-studies.html">Bible Studies</a></li>
             <li><a href="sermons.html">Sermons</a></li>
+            <li><a href="yoga.html">Sermons</a></li>
           </ul>
         </details>
       </nav>
@@ -318,15 +320,21 @@
     </section>
 
     <footer>
-      <div>© <span id="year">2026</span> Peace Lutheran Church — All rights reserved</div>
+      <div class="footer-inner">
+        <div></div>
+        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved
+        </div>
+        <div class="footer-right">
+          <a href="https://kaiserwebdesign.net" target="_blank" rel="noopener" class="footer-link">
+            <span class="footer-built">Website by</span>
+            <img src="images/KaiserWebDesignMutedLogo.png" alt="Kaiser Web Design logo" class="footer-logo" />
+          </a>
+        </div>
+      </div>
     </footer>
 
   <script>
-    // Small helpers and notes for maintainers
-    // -- Replace hero and staff image files in /images/ and keep consistent sizing.
-    // -- To hook up Google Calendar: replace the cal-embed div with an iframe to your calendar (instructions in the HTML comments above).
-    // -- Replace 'Give Online' button link with your provider's donation URL.
-    // -- Accessibility: add alt text to every image and ensure button text describes destination.
+      document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

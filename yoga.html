@@ -1,113 +1,438 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Peace Lutheran — Yoga</title>
+  <title>Peace Lutheran — Home</title>
   <link rel="icon" href="images/favicon.png" type="image/png" />
   <style>
-    :root{
+    :root {
       --primary: #0D348F;
+      /* rgb(13,52,143) */
+      --accent-gold: #F2C94C;
       --accent-light: #0D7BEF;
       --muted: #6B7280;
       --bg: #F7F9FC;
-      --card: #fff;
-      --container-pad: 20px;
+      --card: #FFFFFF;
+      --radius: 4px;
       --max-width: 1100px;
-      --shadow: 0 6px 20px rgba(13,52,143,0.08);
-      --radius: 6px;
+      --container-pad: 20px;
+      --shadow: 0 6px 20px rgba(13, 52, 143, 0.08);
       font-family: Georgia, "Times New Roman", Times, serif;
     }
 
-    /* Reset / base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:#111;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-
-      /* make page a column so footer can sit at bottom */
-      display:flex;
-      flex-direction:column;
-      min-height:100vh;
+    * {
+      box-sizing: border-box
     }
 
-    /* page container */
-    .wrap{
-      width:100%;
-      max-width:var(--max-width);
-      margin:0 auto;
-      padding:28px var(--container-pad);
-      display:flex;
-      flex-direction:column;
-      /* this makes the main content area take remaining space */
-      flex:1 0 auto;
-      gap:18px;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111
     }
 
-    /* make header, page content, footer structured */
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:56px;display:block}
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--primary);text-decoration:none;font-weight:600}
-    nav a:hover{text-decoration:underline}
-    nav a.active{background:var(--primary);color:#fff;padding:8px 12px;border-radius:6px}
-
-    /* main content should grow so footer is pushed down */
-    main.content{flex:1 1 auto; display:block}
-
-    /* simple hero */
-    .bible-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px}
-    .bible-hero h1{margin:10 0 6px;color:var(--primary);font-size:28px}
-
-    /* content layout */
-    .columns{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
-    .card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .lede{font-size:16px;line-height:1.6;color:#222}
-    .section-title{font-weight:700;color:var(--primary);margin-top:8px;margin-bottom:8px}
-
-    /* responsive */
-    .media img{width:100%;height:auto;border-radius:6px;display:block}
-    .meta{font-size:14px;color:var(--muted);margin-bottom:10px}
-
-    @media (max-width:920px){
-      .bible-hero{flex-direction:column;align-items:flex-start;gap:8px}
-      .footer-inner{grid-template-columns:1fr; text-align:center}
-      .footer-right{justify-self:center}
-      .columns{grid-template-columns:1fr;gap:16px}
+    .wrap {
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 var(--container-pad)
     }
 
-    /* video */
-    .video-wrap {display:flex;justify-content:center;align-items:center;margin-top:12px}
-    iframe{border-radius:6px;max-width:100%}
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logo {
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    nav {
+      display: flex;
+      align-items: center
+    }
+
+    nav a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- NEW: dropdown nav styles ---------- */
+    /* Use details/summary for accessible dropdown */
+    nav details {
+      position: relative;
+      margin-left: 18px;
+    }
+
+    
+    nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+
+    /* remove default marker */
+    nav summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* simple caret */
+    nav summary::after {
+      content: " ▾";
+      font-size: 0.9em;
+      color: var(--primary);
+      margin-left: 6px;
+      transition: transform 160ms ease;
+      display: inline-block;
+    }
+
+    nav details[open] summary::after {
+      transform: rotate(-180deg);
+    }
+
+
+    /* dropdown menu */
+    nav details>ul {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      padding: 8px 6px;
+      min-width: 180px;
+      z-index: 100;
+      margin: 0;
+      list-style: none;
+    }
+
+    nav details>ul li {
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    nav details>ul li a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav details>ul li a:hover {
+      text-decoration: underline;
+    }
+    /* footer */
+    footer {
+      padding: 18px 0;
+      border-top: 1px solid #eee;
+      background: transparent;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--container-pad);
+      max-width: 100%;
+    }
+
+    .footer-center {
+      justify-self: center;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .footer-right {
+      justify-self: end
+    }
+
+    .footer-link {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      height: 28px;
+      opacity: .8;
+      transition: transform .16s, opacity .16s
+    }
+
+    .footer-link:hover .footer-logo {
+      opacity: 1;
+      transform: translateY(-1px)
+    }
+    /* ===== Better text styling ===== */
+
+/* Main page title */
+h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin-top: 28px;
+  margin-bottom: 18px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Section headers */
+h2 {
+  font-size: 26px;
+  margin-top: 48px;
+  margin-bottom: 12px;
+  color: var(--primary);
+  font-weight: 700;
+  position: relative;
+}
+
+/* Paragraph text */
+p {
+  font-size: 18px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+  color: #222;
+  max-width: 760px;
+}
+
+/* Strong/bold text */
+strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Italics / scripture */
+em {
+  color: #444;
+  font-style: italic;
+}
+
+/* Better spacing for images */
+figure {
+  margin: 28px 0;
+}
+
+/* Better reading width for article */
+.entry-content {
+  max-width: 820px;
+}
+
+/* Mobile text scaling */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 17px;
+  }
+}
+
+
+    /* Responsive */
+    @media (max-width:920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr
+      }
+
+      .staff-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+
+      .footer-right {
+        justify-self: center
+      }
+
+      /* ensure dropdown fits on smaller screens */
+      nav details>ul {
+        left: auto;
+        right: 0;
+      }
+    }
+
+    @media (max-width:520px) {
+      .staff-grid {
+        grid-template-columns: 1fr
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .footer-right {
+        justify-self: center;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== MAIN CONTENT WRAPPER ===== */
+main {
+  margin-top: 40px;
+}
+
+/* centered readable article card */
+.entry-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  padding: 55px 60px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+/* better section spacing */
+.entry-content > * + * {
+  margin-top: 18px;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* intro paragraph highlight */
+.entry-content > p:first-of-type {
+  font-size: 19px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== SECTION HEADERS ===== */
+h2 {
+  margin-top: 65px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+}
+
+/* ===== PARAGRAPHS ===== */
+p {
+  max-width: 800px;
+}
+
+/* center narrower paragraphs */
+.entry-content p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== IMAGES ===== */
+.entry-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 30px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* ===== YOUTUBE EMBED ===== */
+.wp-block-embed__wrapper {
+  margin: 35px 0;
+}
+
+.wp-block-embed__wrapper iframe {
+  width: 100%;
+  height: 420px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* ===== FIGURE CENTERING ===== */
+figure {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 800px) {
+  .entry-content {
+    padding: 35px 22px;
+  }
+
+  .wp-block-embed__wrapper iframe {
+    height: 260px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  p {
+    font-size: 17px;
+  }
+}
+
   </style>
 </head>
+
 <body>
-  <div class="wrap" role="document">
+  <div class="wrap">
     <header>
-      <div class="brand" itemscope itemtype="http://schema.org/Organization">
-        <img class="logo" src="images/logo.png" alt="Peace Lutheran logo" />
+      <div class="brand">
+        <img class="logo" src="images/logo.png" alt="Peace Lutheran logo">
         <div>
           <div style="font-weight:800;color:var(--primary)">Peace Lutheran</div>
-          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation — Plainfield, IL</div>
+          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation</div>
         </div>
       </div>
-
-      <nav aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7" target="_blank" rel="noopener">Visit</a>
-        <a href="#devotion">Daily Devotion</a>
-        <a href="#events">Calendar</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
+        <a href="index.html#devotion">Daily Devotion</a>
+        <a href="index.html#events">Calendar</a>
         <a href="staff.html">Staff</a>
-        <a href="yoga.html" class="active" aria-current="page">Yoga</a>
 
+        <!-- NEW: Other dropdown -->
         <details>
-          <summary style="cursor:pointer;font-weight:600;color:var(--primary);list-style:none">Other ▾</summary>
-          <ul style="padding:8px 6px;margin:8px 0;background:var(--card);box-shadow:var(--shadow);border-radius:6px;list-style:none">
+          <summary>Other</summary>
+          <ul>
             <li style="padding:6px 0"><a href="bible-studies.html">Bible Studies</a></li>
             <li style="padding:6px 0"><a href="sermons.html">Sermons</a></li>
             <li style="padding:6px 0"><a href="yoga.html">Yoga</a></li>
@@ -116,128 +441,84 @@
       </nav>
     </header>
 
-    <main class="content" id="site-content" role="main">
-      <div class="bible-hero" role="region" aria-labelledby="page-title">
-        <div>
-          <h1 id="page-title">Christian Yoga</h1>
-          <div class="meta">Thursdays • 7:00 PM — Lower Level • No cost, no registration</div>
-        </div>
-        <div class="bible-controls" aria-hidden="false"></div>
-      </div>
+    <!-- Page content (Yoga post) -->
+    <main id="site-content" class="site-content" role="main">
+      <article class="post page" id="post-yoga">
+        <div class="content-area__wrapper">
+          <div class="content-area entry-content content-area">
+            <h1>Why We Use Guided Meditation at the End of Our Christian Yoga Class</h1>
 
-      <div class="columns" aria-live="polite">
-        <!-- main column -->
-        <article class="card" role="article" aria-labelledby="why-title">
-          <h2 id="why-title" class="section-title">Why We Use Guided Meditation</h2>
-          <p class="lede">
-            At the end of our <strong>Christian yoga class</strong>, we incorporate <strong>guided meditation</strong> during
-            <strong>Savasana (Corpse Pose)</strong> to create a sacred space for <strong>deep rest, reflection, and connection with God.</strong>
-            After engaging our bodies in movement, we intentionally quiet our minds and hearts, focusing on Scripture and God’s presence.
-            This time of stillness allows us to fully surrender our worries, release tension, and receive the <strong>peace of Christ.</strong>
-          </p>
+            <p>At the end of our Christian yoga class, we incorporate guided meditation during Savasana (Corpse Pose) to create a sacred space for deep rest, reflection, and connection with God. After engaging our bodies in movement, we intentionally quiet our minds and hearts, focusing on Scripture and God’s presence. This time of stillness allows us to fully surrender our worries, release tension, and receive the peace of Christ.</p>
 
-          <h3 class="section-title">A Christ-centered Practice</h3>
-          <p class="lede">
-            Unlike secular meditation, our practice is rooted in <strong>God’s Word</strong>, directing our thoughts toward
-            <strong>His truth, His promises, and His sustaining grace.</strong> As we rest, we reflect on Scripture, breathe deeply in His presence,
-            and trust in His provision—allowing our faith to be nourished just as our bodies have been strengthened.
-          </p>
+            <p>Unlike secular meditation, our practice is rooted in God’s Word, directing our thoughts toward His truth, His promises, and His sustaining grace. As we rest, we reflect on Scripture, breathe deeply in His presence, and trust in His provision—allowing our faith to be nourished just as our bodies have been strengthened.</p>
 
-          <figure class="media" aria-hidden="false">
-            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-elina-fairytale-3822191-1024x683.jpg" alt="People in a calm yoga class" />
-          </figure>
+            <p>Whether after yoga or in any quiet moment, this guided meditation offers a Christ-centered way to rest, renew, and restore your soul.</p>
 
-          <h3 class="section-title">Join Us</h3>
-          <p class="lede">
-            Whether after yoga or in any quiet moment, this guided meditation offers a <strong>Christ-centered way to rest, renew, and restore your soul.</strong>
-            The class is beginner-friendly (Hatha) and meets each Thursday evening. No cost, no registration — bring a mat and a heart ready to be still.
-          </p>
+            <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+              <div class="wp-block-embed__wrapper">
+                <iframe title="Guided Meditation" width="660" height="371" src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE9WPu5F5Vv94pqtvPP5CqbE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </figure>
 
-          <h3 class="section-title">Scripture & Practice</h3>
-          <p class="lede">
-            We weave Scripture into practice — breathing with awareness, moving in asana, and closing in meditation.
-            Psalm 46:10 (ESV): <em>“Be still, and know that I am God…”</em>
-          </p>
+            <figure class="wp-block-image size-large">
+              <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-elina-fairytale-3822191-1024x683.jpg" alt="">
+            </figure>
 
-          <div style="height:12px"></div>
+            <h2>Yoga</h2>
 
-          <h3 class="section-title">Breath</h3>
-          <p class="lede">
-            Each practice begins with a few minutes of focused attention on our breath; inhaling and exhaling fully.
-            Job 33:4 (ESV): <em>“The Spirit of God has made me, and the breath of the Almighty gives me life.”</em>
-            In the Bible the word for breath is the same word as Spirit — a fitting reminder that our breathing practice connects us to God’s life within us.
-          </p>
+            <p>Join us every Thursday Evening at 7pm for a beginner Hatha Yoga class. There is no cost nor any registration for this class. The class meets in the lower level of the church.</p>
 
-          <figure class="media" aria-hidden="false">
-            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-cliff-booth-4056724-1024x683.jpg" alt="Close-up of calm breathing" />
-          </figure>
+            <p>Yoga is a tool used to stretch the body and through God’s Word bring peace to the soul. It gives us an opportunity to decompress from our hectic lives, and allow God’s healing peace to come upon us. The God spoke through Psalmist and said, “Be still, and know that I am God…” Psalm 46:10 (ESV). So we practice gentle movement on our mat as we Breathe, Asana (pose), and Meditation.</p>
 
-          <h3 class="section-title">Asana</h3>
-          <p class="lede">
-            Asana means "pose." We use gentle Hatha sequences (Savasana, Bharmanasana, standing and seated poses) to strengthen, lengthen, and release tension.
-            Flexibility grows with practice — you don't need to be "flexible" to begin.
-          </p>
+            <figure class="wp-block-image size-large">
+              <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-elina-fairytale-3822168-1024x683.jpg" alt="">
+            </figure>
 
-          <figure class="media" aria-hidden="false">
-            <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-ekaterina-bolovtsova-4051574-1024x683.jpg" alt="Group practicing gentle yoga" />
-          </figure>
+            <h2>Breath</h2>
 
-          <h3 class="section-title">Meditation</h3>
-          <p class="lede">
-            After movement and breath we settle into meditation — usually in Savasana — listening to Scripture, receiving God's peace, and sitting quietly with the Lord.
-            Exodus 14:14 (ESV): <em>“The LORD will fight for you, and you have only to be silent.”</em>
-          </p>
+            <p>Breathing is something we do automatically. Each practice begins with a few minutes of focused attention on our Breath; inhaling and exhaling, fully and deeply. We rely on our breath to guide us with an internal rhythm, so that we don’t become overwhelmed or distracted.</p>
 
-          <h3 class="section-title">Teacher</h3>
-          <p class="lede">
-            <strong>David Balla</strong> — Registered Yoga Teacher (RYT 200) with Yoga Alliance and pastor of Peace Lutheran Church.
-            David blends theological grounding with gentle, accessible movement and invites prayerful reflection in every class.
-          </p>
+            <p>Job 33:4 (ESV) 4 The Spirit of God has made me, and the breath of the Almighty gives me life.</p>
 
-          <div class="video-wrap" aria-hidden="false">
-            <iframe width="627" height="352"
-                    src="https://www.youtube.com/embed/videoseries?list=PLbuqbfCDMAE9WPu5F5Vv94pqtvPP5CqbE"
-                    title="Guided Meditation playlist" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <p>In the Bible, the same word for breath is the same word as Spirit. When God breathed life into Adam and Eve, he breathed his Spirit into them.</p>
+
+            <figure class="wp-block-image size-large">
+              <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-cliff-booth-4056724-1024x683.jpg" alt="">
+            </figure>
+
+            <h2>Asana</h2>
+
+            <p>Asana is a Sanskrit word that means “pose” and refers to the physical practice of yoga. The original names of yoga poses are in Sanskrit and all end in “asana,” for example, Savasana (Corpse <em>Pose</em>), Bharmanasana (Table Top <em>Pose</em>), etc. We string a series of these poses together to create a well-rounded practice that strengthens, stretches, tones, lengthens, and relaxes our muscles, ligaments, and connective tissue.</p>
+
+            <figure class="wp-block-image size-large">
+              <img src="https://peaceplainfield.org/wp-content/uploads/2023/01/pexels-ekaterina-bolovtsova-4051574-1024x683.jpg" alt="">
+            </figure>
+
+            <h2>Meditation</h2>
+
+            <p>All this moving and breathing sets us up for the real treasure – meditation. It’s hard to be still and meditate on Truth when our mind is racing and our body is restless. So we stretch and we strengthen, we breathe into the tight spaces and we make more room so that we can sit for a few minutes and just be still with God.</p>
+
+            <p><em>Exodus 14:14 "14 The LORD will fight for you, and you have only to be silent.”</em></p>
+
+            <p>Meditation can be one of the most challenging parts of a yoga practice, but it’s where the real deep heart work can happen. We close our eyes while in Savasana (Corpse Pose) as we listen and sit with God’s Word. We use yoga to refocus ourself to God’s Word which bring healing to our life.</p>
+
+            <h2>Teacher</h2>
+
+            <p>David Balla is a Registered Yoga Teacher 200hr with Yoga Alliance and is also the pastor of Peace Lutheran Church. He is an avid runner and enjoys peaceful movement that yoga brings to his life.</p>
+
           </div>
-        </article>
-
-        <!-- sidebar -->
-        <aside class="card" aria-labelledby="join-title">
-          <h2 id="join-title" class="section-title">Class Info</h2>
-          <p class="meta"><strong>When:</strong> Thursdays • 7:00 PM</p>
-          <p class="meta"><strong>Where:</strong> Peace Lutheran — Lower Level (24024 West Main St.)</p>
-          <p class="meta"><strong>Cost:</strong> Free</p>
-
-          <hr style="border:none;height:1px;background:#eee;margin:12px 0;border-radius:2px" />
-
-          <h3 class="section-title" style="font-size:15px">What to Bring</h3>
-          <ul style="margin:0 0 12px 18px;color:#333;line-height:1.5">
-            <li>Yoga mat (we have some available)</li>
-            <li>Water bottle</li>
-            <li>Comfortable clothing</li>
-          </ul>
-
-          <h3 class="section-title" style="font-size:15px">Contact</h3>
-          <p class="lede">Questions? <a href="mailto:office@peaceplainfield.org">office@peaceplainfield.org</a></p>
-
-          <hr style="border:none;height:1px;background:#eee;margin:12px 0;border-radius:2px" />
-
-          <h3 class="section-title" style="font-size:15px">More</h3>
-          <ul style="margin:0 0 0 18px;color:#333;line-height:1.6">
-            <li><a href="bible-studies.html">Bible Studies</a></li>
-            <li><a href="sermons.html">Sermons</a></li>
-            <li><a href="contact-us.html">Contact Us</a></li>
-          </ul>
-        </aside>
-      </div>
+        </div>
+      </article>
     </main>
 
-    <footer role="contentinfo">
-      <div class="footer-inner" style="max-width:var(--max-width);margin:0 auto;">
+
+    
+
+    <footer>
+      <div class="footer-inner">
         <div></div>
-        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved</div>
+        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved
+        </div>
         <div class="footer-right">
           <a href="https://kaiserwebdesign.net" target="_blank" rel="noopener" class="footer-link">
             <span class="footer-built">Website by</span>
@@ -246,11 +527,9 @@
         </div>
       </div>
     </footer>
-  </div>
 
-  <script>
-    // keep year current
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
