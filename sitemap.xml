@@ -1,69 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Production SEO Sitemap for Peace Lutheran -->
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Main Pages -->
+  <!-- HOME -->
 
   <url>
-    <loc>https://peaceplainfield.org/</loc>
+    <loc>https://peacelutheran.org/</loc>
+    <lastmod>2026-02-16</lastmod>
     <priority>1.00</priority>
   </url>
 
+  <!-- MAIN PAGES -->
+
   <url>
-    <loc>https://peaceplainfield.org/staff/</loc>
+    <loc>https://peacelutheran.org/staff/</loc>
+    <lastmod>2026-02-16</lastmod>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/bible-studies/</loc>
-    <priority>0.80</priority>
+    <loc>https://peacelutheran.org/bible-studies/</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.75</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/sermons/</loc>
-    <priority>0.80</priority>
+    <loc>https://peacelutheran.org/sermons/</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/yoga/</loc>
-    <priority>0.80</priority>
+    <loc>https://peacelutheran.org/yoga/</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.60</priority>
   </url>
 
-  <!-- Anchor Sections (optional but useful for SEO indexing sections) -->
+  <!-- IMPORTANT SECTIONS (ANCHOR INDEXING FOR SEO) -->
 
   <url>
-    <loc>https://peaceplainfield.org/#about</loc>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://peaceplainfield.org/#devotion</loc>
-    <priority>0.50</priority>
+    <loc>https://peacelutheran.org/#about</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.60</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/#ministries</loc>
-    <priority>0.50</priority>
+    <loc>https://peacelutheran.org/#devotion</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/#staff</loc>
-    <priority>0.50</priority>
+    <loc>https://peacelutheran.org/#ministries</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.65</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/#events</loc>
-    <priority>0.50</priority>
+    <loc>https://peacelutheran.org/#events</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://peaceplainfield.org/#contact</loc>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://peaceplainfield.org/#socials</loc>
-    <priority>0.50</priority>
+    <loc>https://peacelutheran.org/#contact</loc>
+    <lastmod>2026-02-16</lastmod>
+    <priority>0.70</priority>
   </url>
 
 </urlset>
