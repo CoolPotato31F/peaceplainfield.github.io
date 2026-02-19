@@ -949,13 +949,11 @@
 
         function showNext() {
           const nextNumber = (currentImageIndex % imgCount) + 1;
-          console.log("next")
           showImageByNumber(nextNumber);
         }
 
         function showPrev() {
           const prevNumber = ((currentImageIndex - 2 + imgCount) % imgCount) + 1;
-          console.log("prev")
           showImageByNumber(prevNumber);
         }
 
@@ -1065,7 +1063,6 @@
             const extra = Math.max((imgHeight - wrapperH) / 2, 0);
 
             const translate = Math.round(norm * extra * speed);
-            console.log(translate);
             img.style.setProperty('--parallax', translate + 'px');
           });
 
