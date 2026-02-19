@@ -1,0 +1,114 @@
+[
+  {
+    "name": "David Balla",
+    "role": "Pastor",
+    "desc": "Leads worship, preaches God’s Word, administers the Sacraments, and provides spiritual guidance and pastoral care for the congregation and community.",
+    "img": "../images/staff-pastor.jpg",
+    "alt": "Peace Lutheran Pastor David Balla"
+  },
+  {
+    "name": "Donovan Fechner",
+    "role": "Elder Chair",
+    "desc": "Leads the board of elders, supports the pastor, and helps guide the spiritual life and direction of the congregation.",
+    "img": "../images/staff-head_elder.jpg",
+    "alt": "Peace Lutheran Head Elder Donovan Fechner"
+  },
+  {
+    "name": "Diane Bennett",
+    "role": "Church Secretary",
+    "desc": "Manages church communications, scheduling, and office operations while serving as a welcoming point of contact for members and visitors.",
+    "img": "../images/staff-secretary.jpg",
+    "alt": "Peace Lutheran Church Secretary Diane Bennett"
+  },
+  {
+    "name": "Rob Metzger",
+    "role": "Elder",
+    "desc": "Serves the congregation through spiritual support, prayer, and assistance with worship and church ministries.",
+    "img": "../images/staff-elder-3.jpg",
+    "alt": "Peace Lutheran Elder Rob Metzger"
+  },
+  {
+    "name": "Craig Pape",
+    "role": "Elder",
+    "desc": "Provides spiritual care and leadership while supporting church services, ministries, and congregational needs.",
+    "img": "../images/staff-elder-2.jpg",
+    "alt": "Peace Lutheran Elder Craig Pape"
+  },
+  {
+    "name": "Kai Lidke",
+    "role": "Elder",
+    "desc": "Assists with worship, prayer, and congregational care while supporting the mission and ministry of the church.",
+    "img": "../images/staff-elder-1.jpg",
+    "alt": "Peace Lutheran Elder Kai Lidke"
+  },
+  {
+    "name": "Praise Band",
+    "role": "Church Band",
+    "desc": "Leads the congregation in worship through music, helping create a meaningful and uplifting praise experience each week.",
+    "img": "../images/staff-praise-band.jpg",
+    "alt": "Peace Lutheran Praise Band"
+  },
+  {
+    "name": "Jo Lynn Worden",
+    "role": "Trustee",
+    "desc": "Helps oversee church property and facilities, ensuring the building and grounds remain safe, welcoming, and well maintained.",
+    "img": "../images/staff-trustee.jpg",
+    "alt": "Peace Lutheran Trustee Jo Lynn Worden"
+  },
+  {
+    "name": "Adam Bennett",
+    "role": "Accounting Board Member",
+    "desc": "Supports the church’s financial oversight and budgeting to ensure responsible stewardship of resources.",
+    "img": "../images/staff-accounting-board-member.jpg",
+    "alt": "Accounting Board Member Adam Bennett"
+  },
+  {
+    "name": "Dan Bodner",
+    "role": "Accounting Board Member",
+    "desc": "Assists with financial planning, reporting, and accountability to help maintain strong and transparent church finances.",
+    "img": "../images/staff-accounting-board-member.jpg",
+    "alt": "Accounting Board Member Dan Bodner"
+  },
+  {
+    "name": "Debbie Judd",
+    "role": "Financial Secretary",
+    "desc": "Maintains financial records, processes contributions, and ensures accurate reporting for the congregation.",
+    "img": "../images/staff-financial-secretary.jpg",
+    "alt": "Financial Secretary Debbie Judd"
+  },
+  {
+    "name": "Ellie Rubach",
+    "role": "Recording Secretary",
+    "desc": "Records meeting minutes and maintains official church records to support organized and effective leadership.",
+    "img": "../images/staff-recording-secretary.jpg",
+    "alt": "Recording Secretary Ellie Rubach"
+  },
+  {
+    "name": "Mark Pocius",
+    "role": "Treasurer",
+    "desc": "Oversees church finances, budgeting, and reporting while ensuring faithful stewardship of all financial resources.",
+    "img": "../images/staff-treasurer.jpg",
+    "alt": "Treasurer Mark Pocius"
+  },
+  {
+    "name": "Brandi Pocius",
+    "role": "Evangelism Board Member",
+    "desc": "Supports outreach efforts and community connections, helping share the message of Christ and welcome new members.",
+    "img": "../images/staff-evangelism-board-member.jpg",
+    "alt": "Evangelism Board Member Brandi Pocius"
+  },
+  {
+    "name": "April Kundid",
+    "role": "Evangelism Board Member",
+    "desc": "Works with the evangelism team to plan outreach opportunities and build connections within the community.",
+    "img": "../images/staff-evangelism-board-member.jpg",
+    "alt": "Evangelism Board Member April Kundid"
+  },
+  {
+    "name": "Lori Hayman",
+    "role": "Evangelism Board Member",
+    "desc": "Helps lead outreach and welcoming efforts, encouraging growth and connection within the church and community.",
+    "img": "../images/staff-evangelism-board-member.jpg",
+    "alt": "Evangelism Board Member Lori Hayman"
+  }
+]
