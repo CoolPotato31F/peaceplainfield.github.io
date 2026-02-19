@@ -722,36 +722,24 @@
           <h4>Jr. Confirmation</h4>
           <p>Bible studies, small groups, and classes for faith formation.</p>
         </div>
+
+        <div class="card">
+          <div class="card-hero">
+            <img src="images/ministries-bible-study.jpg" alt="Adult bible study at Peace Lutheran">
+          </div>
+          <h4>Adult Bible Study</h4>
+          <p>Weekly gatherings to study Scripture, grow in faith, and connect with others.</p>
+        </div>
       </div>
     </section>
 
     <!-- STAFF & LEADERSHIP -->
     <section id="staff">
       <h2 style="color:var(--primary)">Staff & Leadership</h2>
-      <div class="staff-grid" style="margin-top:12px">
-        <div class="staff">
-          <img src="images/staff-pastor.jpg" alt="Peace Lutheran Pastor David Balla" />
-          <h4>David Balla</h4>
-          <div class="role">Pastor</div>
-          <div class="desc">Preaches the Word, administers the Sacraments, and provides spiritual care and leadership
-            for the congregation.</div>
-        </div>
-        <div class="staff">
-          <img src="images/staff-head_elder.jpg" alt="Peace Lutheran Head Elder Donovan Fechner" />
-          <h4>Donovan Fechner</h4>
-          <div class="role">Elder Chair</div>
-          <div class="desc">Manages (placeholder)</div>
-        </div>
-
-        <div class="staff">
-          <img src="images/staff-secretary.jpg" alt="Peace Lutheran Church Secretary" />
-          <h4>Diane Bennett</h4>
-          <div class="role">Church Secretary</div>
-          <div class="desc">(placeholder)</div>
-        </div>
-      </div>
+      <div class="staff-grid" id="home-staff" style="margin-top:12px"></div>
       <a style="color:var(--muted)" href="/staff/">Click here for more staff</a>
     </section>
+
 
     <!-- CALENDAR / EVENTS -->
     <section id="events">
@@ -1225,6 +1213,31 @@
       });
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+    <script>
+      fetch("staff.json")
+        .then(res => res.json())
+        .then(staffData => {
+
+          // get first 3 staff members
+          const firstThree = staffData.slice(0, 3);
+          const container = document.getElementById("home-staff");
+
+          firstThree.forEach(staff => {
+            container.innerHTML += `
+        <div class="staff">
+          <img src="${staff.img}" alt="${staff.alt}">
+          <h4>${staff.name}</h4>
+          <div class="role">${staff.role}</div>
+          <div class="desc">${staff.desc}</div>
+        </div>
+      `;
+          });
+
+        })
+        .catch(err => console.error("Failed to load staff.json:", err));
+    </script>
+
+
 
 </body>
 
