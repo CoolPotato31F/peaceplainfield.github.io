@@ -85,6 +85,21 @@
       justify-content: center;
       flex-direction: column;
       text-shadow: 0 6px 22px rgba(2, 6, 23, 0.6);
+      transition: opacity 600ms ease, transform 600ms ease;
+      opacity: 1;
+      transform: translateY(0);
+      will-change: opacity, transform;
+    }
+
+    .content.fade-out {
+      opacity: 0;
+      transform: translateY(10px) scale(1.01);
+      pointer-events: none;
+    }
+
+    .content.fade-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     .portrait {
@@ -270,79 +285,110 @@
   </div>
 
   <script>
-    /* ===============================
-       STAFF TABLE (EDIT HERE ONLY)
-    ================================= */
-    const staffTable = [
-      {
-        image: "/images/staff-pastor.jpg",
-        name: "David Balla",
-        role: "Pastor",
-        description: "Preaches the Word, administers the Sacraments, and provides spiritual care and leadership for the congregation."
-      },
-      {
-        image: "/images/staff-head_elder.jpg",
-        name: "Donovan Fechner",
-        role: "Head Elder",
-        description: "Supports the pastor and congregation through leadership and spiritual care."
-      },
-      {
-        image: "/images/staff-elder-3.jpg",
-        name: "Rob Metzger",
-        role: "Elder",
-        description: "Assists in worship services and congregational care."
-      },
-      {
-        image: "/images/staff-organist.jpg",
-        name: "Name Here",
-        role: "Organist",
-        description: "Leads music and supports worship each week."
-      }
-    ];
-
     const portraitImg = document.getElementById('portraitImg');
     const nameEl = document.getElementById('nameEl');
     const roleEl = document.getElementById('roleEl');
     const descEl = document.getElementById('descEl');
     const slide = document.getElementById('slide');
+    const contentEl = document.querySelector('.content');
 
+    let staffTable = [];
     let index = 0;
     let transitioning = false;
+    const DISPLAY_MS = 12000;   // total time each card is visible
+    const FADE_MS = 600;        // must match CSS transition duration
 
-    function setContent(s) {
-      portraitImg.src = s.image;
-      portraitImg.alt = s.name;
-      nameEl.textContent = s.name;
-      roleEl.textContent = s.role;
-      descEl.textContent = s.description;
+    // preload and check image loads
+    function preloadImage(src) {
+      return new Promise((resolve) => {
+        if (!src) return resolve(false);
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = src;
+      });
     }
 
-    function transitionToNext() {
-      if (transitioning) return;
+    // small timeout helper
+    function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function applyContent(obj) {
+      // set portrait and text — portrait will appear instantly after fade
+      portraitImg.src = obj.img;
+      portraitImg.alt = obj.alt || obj.name || 'Staff portrait';
+      nameEl.textContent = obj.name || '';
+      roleEl.textContent = obj.role || '';
+      descEl.textContent = obj.desc || '';
+    }
+
+    // show next with smooth fade-out -> swap -> fade-in
+    async function showNext() {
+      if (transitioning || staffTable.length === 0) return;
       transitioning = true;
 
-      slide.classList.add("fade-out");
+      // compute next index but don't commit until transition finishes
+      const nextIndex = (index + 1) % staffTable.length;
+      const next = staffTable[nextIndex];
 
-      setTimeout(() => {
-        index = (index + 1) % staffTable.length;
-        setContent(staffTable[index]);
+      // preload the next image so swap is instant
+      await preloadImage(next.img);
 
-        slide.classList.remove("fade-out");
-        slide.classList.add("fade-in");
+      // fade out content (only content, not background)
+      contentEl.classList.add('fade-out');
 
-        setTimeout(() => {
-          slide.classList.remove("fade-in");
-          transitioning = false;
-        }, 900);
+      // wait for fade-out to complete
+      await wait(FADE_MS);
 
-      }, 900);
+      // swap content
+      applyContent(next);
+
+      // remove fade-out and add fade-in class to trigger gentle pop
+      contentEl.classList.remove('fade-out');
+      contentEl.classList.add('fade-in');
+
+      // wait for fade-in to finish
+      await wait(FADE_MS);
+
+      // cleanup and update index
+      contentEl.classList.remove('fade-in');
+      index = nextIndex;
+      transitioning = false;
     }
 
-    setContent(staffTable[index]);
+    // Load staff.json, filter to only entries whose images actually load,
+    // then start the slideshow.
+    (async function init() {
+      try {
+        const res = await fetch('/staff.json');
+        if (!res.ok) throw new Error('Failed to fetch staff.json: ' + res.status);
+        const data = await res.json();
 
-    setInterval(transitionToNext, 12000);
+        const valid = [];
+        for (const s of data) {
+          if (!s.img || !s.img.trim()) continue;
+          const ok = await preloadImage(s.img);
+          if (ok) valid.push(s);
+        }
+
+        staffTable = valid;
+
+        if (staffTable.length === 0) {
+          console.warn('No valid staff entries with images found in staff.json');
+          // Optionally show a fallback message or hide portrait
+          slide.classList.add('no-portrait');
+          return;
+        }
+
+        // initial content (ensure first image is loaded)
+        applyContent(staffTable[0]);
+
+        // start automatic rotation but ensure we wait DISPLAY_MS before first change
+        setInterval(showNext, DISPLAY_MS);
+      } catch (err) {
+        console.error('Error initializing staff slide:', err);
+      }
+    })();
   </script>
-
 
 </body>
 
