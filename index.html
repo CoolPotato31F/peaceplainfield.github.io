@@ -168,6 +168,7 @@
       font-weight: 700
     }
 
+
     h1 {
       margin: 10px 0 6px;
       font-size: 34px;
@@ -413,7 +414,7 @@
       border-radius: 4px
     }
 
-    
+
     .calendar-events {
       flex: 1;
       background: var(--card);
@@ -776,7 +777,8 @@
           <ul>
             <li>Parade — Dec 31</li>
           </ul>
-          <button id="viewAllEventsBtn" class="btn btn-primary" style="margin-top: 10px;" onclick="window.location.href='/events/'">View all events</button>
+          <button id="viewAllEventsBtn" class="btn btn-primary" style="margin-top: 10px;"
+            onclick="window.location.href='/events/'">View all events</button>
         </div>
         <div class="calendar">
           <iframe
@@ -1097,13 +1099,13 @@
 
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', updateParallax);
-                // Run once immediately so image is positioned correctly on load
+        // Run once immediately so image is positioned correctly on load
         updateParallax();
 
         // Also ensure correct position after everything (including images) loads
         window.addEventListener('load', updateParallax);
       })();
-      
+
       /* ---------- NEW: close dropdown when clicking outside or pressing Esc ---------- */
       (function () {
         document.addEventListener('click', function (e) {
