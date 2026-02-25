@@ -407,10 +407,22 @@
     }
 
     .calendar {
+      flex: 3;
+      background: var(--card);
+      padding: 12px;
+      border-radius: 4px
+    }
+
+    
+    .calendar-events {
       flex: 1;
       background: var(--card);
       padding: 12px;
       border-radius: 4px
+    }
+
+    .calendar-events ul li {
+      margin-bottom: 10px;
     }
 
     .cal-embed {
@@ -593,7 +605,7 @@
         <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
         <a href="/#devotion">Daily Devotion</a>
         <a href="/#events">Calendar</a>
-        <a href="/staff/">Staff</a>
+        <a href="/yoga/">Yoga</a>
 
         <!-- NEW: Other dropdown -->
         <details>
@@ -601,7 +613,7 @@
           <ul>
             <li><a href="/bible-studies/">Bible Studies</a></li>
             <li><a href="/sermons/">Sermons</a></li>
-            <li><a href="/yoga/">Yoga</a></li>
+            <li><a href="/staff/">Staff</a></li>
           </ul>
         </details>
       </nav>
@@ -672,22 +684,28 @@
       </div>
       <div class="card" style="padding:20px">
         <h2 style="color:var(--primary)">Who We Are</h2>
-        <p>Peace Lutheran is a congregation in the Lutheran tradition, committed to proclaiming Christ crucified and risen through the faithful preaching of His Word and the administration of His Sacraments. As a congregation of The Lutheran Church—Missouri Synod, we confess the Holy Scriptures as the inspired and inerrant Word of God and uphold the Lutheran Confessions as a true and faithful exposition of that Word.<em>
-        </em></p>
+        <p>Peace Lutheran is a congregation in the Lutheran tradition, committed to proclaiming Christ crucified and
+          risen through the faithful preaching of His Word and the administration of His Sacraments. As a congregation
+          of The Lutheran Church—Missouri Synod, we confess the Holy Scriptures as the inspired and inerrant Word of God
+          and uphold the Lutheran Confessions as a true and faithful exposition of that Word.<em>
+          </em></p>
 
         <h3 style="margin-top:14px">Quick Beliefs</h3>
         <div class="cards" style="margin-top:10px">
           <div class="card">
             <h4>Scripture</h4>
-            <p>We confess the Holy Scriptures of the Old and New Testaments as the inspired and inerrant Word of God and the only rule and norm of faith and life.</p>
+            <p>We confess the Holy Scriptures of the Old and New Testaments as the inspired and inerrant Word of God and
+              the only rule and norm of faith and life.</p>
           </div>
           <div class="card">
             <h4>Sacraments</h4>
-            <p>We confess that Christ gives forgiveness, life, and salvation through His Sacraments—Holy Baptism and the Lord’s Supper—where He truly and graciously delivers what He promises.</p>
+            <p>We confess that Christ gives forgiveness, life, and salvation through His Sacraments—Holy Baptism and the
+              Lord’s Supper—where He truly and graciously delivers what He promises.</p>
           </div>
           <div class="card">
             <h4>Grace</h4>
-            <p>We confess that we are saved by grace alone through faith alone in Christ alone, not by our works, but by His mercy won for us in His death and resurrection.</p>
+            <p>We confess that we are saved by grace alone through faith alone in Christ alone, not by our works, but by
+              His mercy won for us in His death and resurrection.</p>
           </div>
         </div>
         <a style="color:var(--muted);" href="https://www.lcms.org/about/beliefs" target="_blank">Click here for more
@@ -753,16 +771,17 @@
     <section id="events">
       <h2 style="color:var(--primary)">Events & Calendar</h2>
       <div class="calendar-wrap" style="margin-top:12px">
-        <div class="calendar">
+        <div class="calendar-events">
           <h4 style="margin-top:0px">Upcoming Events</h4>
           <ul>
             <li>Parade — Dec 31</li>
           </ul>
+          <button id="viewAllEventsBtn" class="btn btn-primary" style="margin-top: 10px;">View all events</button>
         </div>
         <div class="calendar">
           <iframe
             src=https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=1&showTitle=0&src=cGxjcGZsZEBnbWFpbC5jb20&color=%23039be5
-            style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            style="border:solid 1px #777" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
         </div>
       </div>
     </section>
@@ -797,8 +816,8 @@
       <h2 style="color:var(--primary)">Connect With Us</h2>
       <p class="lead">Follow us on social media to stay updated!</p>
       <div style="margin-top:12px; display:flex; justify-content:center; gap:18px; flex-wrap:wrap;">
-        <a class="socialLogo" href="https://www.facebook.com/p/Peace-Lutheran-Church-100070387156943/" target="_blank" rel="noopener"
-          style="color:var(--primary); font-size:24px; text-decoration:none;">
+        <a class="socialLogo" href="https://www.facebook.com/p/Peace-Lutheran-Church-100070387156943/" target="_blank"
+          rel="noopener" style="color:var(--primary); font-size:24px; text-decoration:none;">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
             <path
               d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.325v21.351c0 .732.592 1.324 1.325 1.324h11.495v-9.294h-3.13v-3.622h3.13v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.794.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.764v2.311h3.587l-.467 3.622h-3.12v9.293h6.116c.732 0 1.324-.592 1.324-1.324v-21.35c0-.733-.592-1.325-1.324-1.325z" />
@@ -1078,9 +1097,12 @@
 
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', updateParallax);
-        onScroll()
-      })();
+                // Run once immediately so image is positioned correctly on load
+        updateParallax();
 
+        // Also ensure correct position after everything (including images) loads
+        window.addEventListener('load', updateParallax);
+      })();
       /* ---------- NEW: close dropdown when clicking outside or pressing Esc ---------- */
       (function () {
         document.addEventListener('click', function (e) {
@@ -1107,35 +1129,29 @@
         `&orderBy=startTime` +
         `&timeMin=${new Date().toISOString()}`;
 
-      // helper formatters
       const monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'America/Chicago' });
       const timeFormatter = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Chicago' });
 
-      // target the first calendar's <ul> (the "Upcoming Events" list)
-      const eventsList = (function () {
-        const calendars = document.querySelectorAll('.calendar');
-        if (!calendars || calendars.length === 0) return null;
-        return calendars[0].querySelector('ul'); // first .calendar -> its ul
-      })();
+      const calendars = document.querySelectorAll('.calendar');
+      const eventCalendar = document.querySelector('.calendar-events');
+      const eventsList = eventCalendar.querySelector('ul');
+      const calendarContainer = (calendars && calendars.length) ? calendars[0] : null;
+      const EVENTS_PAGE = '/events/';   // change if your events page uses a different URL
+      const MAX_SHOW = 7;
 
       function formatEventStart(start) {
-        // all-day events come as start.date (YYYY-MM-DD)
         if (start.date) {
-          // build "MMM D" manually to avoid timezone shifts
           const [y, m, d] = start.date.split('-').map(s => parseInt(s, 10));
           return `${monthNamesShort[m - 1]} ${d}`;
         }
-
-        // events with a specific time: start.dateTime (ISO)
         if (start.dateTime) {
           const dt = new Date(start.dateTime);
-          const datePart = dateFormatter.format(dt);          // e.g. "Feb 1"
-          const timePart = timeFormatter.format(dt);          // e.g. "6:00 PM"
+          const datePart = dateFormatter.format(dt);
+          const timePart = timeFormatter.format(dt);
           return `${datePart}, ${timePart}`;
         }
-
-        return ''; // fallback
+        return '';
       }
 
       fetch(url)
@@ -1151,7 +1167,7 @@
             return;
           }
 
-          // clear placeholder items (like "Parade — Dec 31")
+          // clear placeholder items
           eventsList.innerHTML = '';
 
           if (events.length === 0) {
@@ -1161,22 +1177,22 @@
             return;
           }
 
-          events.forEach(event => {
+          // show up to MAX_SHOW events
+          const toShow = events.slice(0, MAX_SHOW);
+          toShow.forEach(event => {
             const title = event.summary || 'Untitled event';
             const start = event.start || {};
             const formattedStart = formatEventStart(start);
 
             const li = document.createElement('li');
-
-            // If we have a date/time, include it after an em-dash, otherwise just the title
             if (formattedStart) {
               li.textContent = `${title} — ${formattedStart}`;
             } else {
               li.textContent = title;
             }
-
             eventsList.appendChild(li);
           });
+
         })
         .catch(err => {
           console.error(err);
@@ -1187,6 +1203,7 @@
             eventsList.appendChild(li);
           }
         });
+
       const form = document.getElementById('contact-form');
       const responseDiv = document.getElementById('form-response');
 
