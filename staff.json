@@ -30,13 +30,13 @@
   {
     "name": "Craig Pape",
     "role": "Elder",
-    "desc": "Provides spiritual care and leadership while supporting church services, ministries, and congregational needs.",
+    "desc": "Serves the congregation through spiritual support, prayer, and assistance with worship and church ministries.",
     "img": "../images/staff-elder-2.jpg",
     "alt": "Peace Lutheran Elder Craig Pape"
   },
   {
     "name": "Kai Lidke",
-    "role": "Elder",
+    "role": "Worship Assistant",
     "desc": "Assists with worship, prayer, and congregational care while supporting the mission and ministry of the church.",
     "img": "../images/staff-elder-1.jpg",
     "alt": "Peace Lutheran Elder Kai Lidke"
@@ -100,14 +100,14 @@
   {
     "name": "April Kundid",
     "role": "Evangelism Board Member",
-    "desc": "Works with the evangelism team to plan outreach opportunities and build connections within the community.",
+    "desc": "Supports outreach efforts and community connections, helping share the message of Christ and welcome new members.",
     "img": "../images/staff-evangelism-board-member.jpg",
     "alt": "Evangelism Board Member April Kundid"
   },
   {
     "name": "Lori Hayman",
     "role": "Evangelism Board Member",
-    "desc": "Helps lead outreach and welcoming efforts, encouraging growth and connection within the church and community.",
+    "desc": "Supports outreach efforts and community connections, helping share the message of Christ and welcome new members.",
     "img": "../images/staff-evangelism-board-member.jpg",
     "alt": "Evangelism Board Member Lori Hayman"
   }
