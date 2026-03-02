@@ -418,9 +418,23 @@
 
     <!-- STAFF & LEADERSHIP -->
     <section id="staff">
-      <h2 style="color:var(--primary)">Staff & Leadership</h2>
+  <h2 style="color:var(--primary)">Staff & Leadership</h2>
+
+      <!-- NEW NOTICE -->
+      <div style="
+          margin:10px 0 18px;
+          padding:12px 16px;
+          background:#fff8e1;
+          border-left:4px solid var(--accent-gold);
+          border-radius:4px;
+          font-size:14px;
+          color:#444;
+      ">
+        If you don’t see yourself listed, it is most likely because we do not yet have a photo on file for you. 
+        Please contact the pastor or church office to take one.
+      </div>
+
       <div class="staff-grid" id="staff-grid" style="margin-top:12px">
-        <!-- cards will be injected here by script -->
         <div class="card" id="loading-card" style="text-align:center;">
           Loading staff…
         </div>
@@ -453,16 +467,13 @@
       // Path to JSON: put staff.json in the same folder as this HTML file.
       const JSON_PATH = '../staff.json';
 
-      // Build a single staff card element from data
-      function buildCard(item) {
+      // Create the DOM structure for a staff card (using an already-loaded <img>)
+      function createCardWithImage(imgEl, item) {
         const div = document.createElement('div');
         div.className = 'staff';
 
-        const img = document.createElement('img');
-        // allow either absolute or relative image paths from JSON
-        img.src = item.img || '../images/staff-placeholder.jpg';
-        img.alt = item.alt || (item.name ? `${item.name}` : 'Staff photo');
-        div.appendChild(img);
+        // use the already loaded <img> element to avoid double-load
+        div.appendChild(imgEl);
 
         const h4 = document.createElement('h4');
         h4.textContent = item.name || 'Name';
@@ -481,14 +492,9 @@
         return div;
       }
 
-      // Clear existing children
-      function clearContainer() {
-        while (container.firstChild) container.removeChild(container.firstChild);
-      }
-
-      // Show an error/fallback card
       function showFallback(message) {
-        clearContainer();
+        // remove everything and show fallback message
+        container.innerHTML = '';
         const f = document.createElement('div');
         f.className = 'card';
         f.style.textAlign = 'center';
@@ -496,28 +502,77 @@
         container.appendChild(f);
       }
 
-      // fetch the JSON and render
       fetch(JSON_PATH)
         .then(res => {
           if (!res.ok) throw new Error('Network response was not ok');
           return res.json();
         })
         .then(data => {
-          // Expecting an array at top-level, optionally { staff: [...] }
           const list = Array.isArray(data) ? data : (Array.isArray(data.staff) ? data.staff : []);
           if (!list.length) {
             showFallback('No staff entries found.');
             return;
           }
 
-          clearContainer();
-          list.forEach(item => {
-            const card = buildCard(item);
-            container.appendChild(card);
+          // keep loading card visible while images are being checked
+          let appended = 0;
+
+          // create array of promises that resolve when each image is handled
+          const checks = list.map(item => {
+            return new Promise(resolve => {
+              // require an image path — you can change behavior to use a placeholder if you prefer
+              const src = item.img && item.img.trim() ? item.img.trim() : null;
+              if (!src) {
+                // no image path -> skip
+                return resolve(false);
+              }
+
+              // create the <img> element and only append it after load
+              const img = document.createElement('img');
+              img.alt = item.alt || (item.name ? item.name : 'Staff photo');
+              // set same class/attributes so CSS applies
+              img.style.width = '';
+              img.style.height = '';
+              img.style.objectFit = '';
+              img.className = 'staff-photo'; // optional class to inspect if needed
+
+              // success -> create card and append
+              img.onload = () => {
+                // style integrity: ensure expected class/styles are applied by moving into card
+                img.className = ''; // remove test class so CSS .staff img applies once placed
+                img.style.width = ''; // let CSS control
+                img.style.height = '';
+                const card = createCardWithImage(img, item);
+                // append before removing loading to keep content stable
+                container.appendChild(card);
+                appended++;
+                resolve(true);
+              };
+
+              // error -> skip this entry
+              img.onerror = () => {
+                resolve(false);
+              };
+
+              // start loading image
+              img.src = src;
+            });
+          });
+
+          // after all checks finish, if none appended show fallback; remove loading card
+          Promise.all(checks).then(() => {
+            if (loading && loading.parentNode === container) {
+              container.removeChild(loading);
+            }
+            if (appended === 0) {
+              showFallback('No valid staff images found.');
+            } else {
+              // Optionally: if you'd like cards to be ordered the same as the JSON,
+              // create them in sequence: for simplicity above we append as each image loads.
+            }
           });
         })
         .catch(err => {
-          console.error('Failed to load staff.json', err);
           showFallback('Error loading staff list.');
         });
     })();

@@ -542,9 +542,52 @@
         left: auto;
         right: 0;
       }
-    }
 
-    @media (max-width:520px) {
+      .calendar-wrap {
+        flex-direction: column;
+      }
+
+      .calendar-events {
+        order: -1;
+        /* show events above calendar */
+        padding: 18px;
+      }
+
+      .calendar-events h4 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+
+      .calendar-events ul {
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .calendar-events ul li {
+        background: var(--bg);
+        padding: 14px 16px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 1.4;
+        box-shadow: 0 4px 12px rgba(13, 52, 143, 0.06);
+      }
+
+      .calendar {
+        padding: 10px;
+      }
+
+      .calendar iframe {
+        height: 420px !important;
+        border-radius: 6px;
+      }
+
+      #viewAllEventsBtn {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+      }
+
       .staff-grid {
         grid-template-columns: 1fr
       }
@@ -558,6 +601,7 @@
         justify-self: center;
       }
     }
+
 
     /* Smooth scrolling for anchor links */
     html {
@@ -649,7 +693,8 @@
         <p class="lead">We are a Lutheran congregation rooted in the Gospel. Join us for worship, study, and service —
           all are welcome.</p>
         <div class="ctas">
-          <button onclick='location.href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7"' class="btn btn-primary">Visit</button>
+          <button onclick='location.href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7"'
+            class="btn btn-primary">Visit</button>
           <button class="btn btn-ghost" data-scroll-target="contact">Contact</button>
           <button class="btn btn-ghost" data-scroll-target="devotion">Daily Devotions</button>
         </div>
