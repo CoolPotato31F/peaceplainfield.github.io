@@ -182,10 +182,15 @@
     }
 
     .ctas {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px
-    }
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;   /* allows wrapping */
+  gap: 12px;
+}
+
+.ctas .btn {
+  flex: 0 0 auto;    /* do NOT grow or stretch */
+}
 
     .btn {
       padding: 12px 18px;
@@ -696,16 +701,8 @@
           <button onclick='location.href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7"'
             class="btn btn-primary">Visit</button>
           <button class="btn btn-ghost" data-scroll-target="contact">Contact</button>
+          <button class="btn btn-ghost" data-scroll-target="events">Calendar</button>
           <button class="btn btn-ghost" data-scroll-target="devotion">Daily Devotions</button>
-        </div>
-
-        <!-- Core professional must-haves as quick bullets -->
-        <div style="margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
-          <div class="card">• <a href="bible-studies/"
-              style="margin-left: 18px;color: var(--primary);text-decoration: none;font-weight: 600">Bible Studies</a>
-          </div>
-          <div class="card">• <a href="sermons/"
-              style="margin-left: 18px;color: var(--primary);text-decoration: none;font-weight: 600">Sermons</a></div>
         </div>
       </div>
 
