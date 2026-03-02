@@ -42,6 +42,13 @@
     "alt": "Peace Lutheran Elder Kai Lidke"
   },
   {
+    "name": "Launda Powell",
+    "role": "Custodian",
+    "desc": "Maintains the cleanliness and upkeep of the church building and grounds, creating a welcoming and safe environment for worship and community activities.",
+    "img": "../images/staff-custodian.jpg",
+    "alt": "Peace Lutheran Custodian Launda Powell"
+  },
+  {
     "name": "Praise Band",
     "role": "Church Band",
     "desc": "Leads the congregation in worship through music, helping create a meaningful and uplifting praise experience each week.",
