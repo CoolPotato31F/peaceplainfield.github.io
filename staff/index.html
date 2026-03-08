@@ -418,7 +418,7 @@
 
     <!-- STAFF & LEADERSHIP -->
     <section id="staff">
-  <h2 style="color:var(--primary)">Staff & Leadership</h2>
+      <h2 style="color:var(--primary)">Staff & Leadership</h2>
 
       <!-- NEW NOTICE -->
       <div style="
@@ -430,7 +430,7 @@
           font-size:14px;
           color:#444;
       ">
-        If you don’t see yourself listed, it is most likely because we do not yet have a photo on file for you. 
+        If you don’t see yourself listed, it is most likely because we do not yet have a photo on file for you.
         Please contact the pastor or church office to take one.
       </div>
 
@@ -457,23 +457,21 @@
   </div>
 
   <script>
-    // update year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     (function () {
+
       const container = document.getElementById('staff-grid');
       const loading = document.getElementById('loading-card');
 
-      // Path to JSON: put staff.json in the same folder as this HTML file.
       const JSON_PATH = '../staff.json';
 
-      // Create the DOM structure for a staff card (using an already-loaded <img>)
-      function createCardWithImage(imgEl, item) {
+      function createCard(item, img) {
+
         const div = document.createElement('div');
         div.className = 'staff';
 
-        // use the already loaded <img> element to avoid double-load
-        div.appendChild(imgEl);
+        div.appendChild(img);
 
         const h4 = document.createElement('h4');
         h4.textContent = item.name || 'Name';
@@ -493,88 +491,84 @@
       }
 
       function showFallback(message) {
-        // remove everything and show fallback message
         container.innerHTML = '';
         const f = document.createElement('div');
         f.className = 'card';
         f.style.textAlign = 'center';
-        f.textContent = message || 'Unable to load staff.';
+        f.textContent = message;
         container.appendChild(f);
       }
 
       fetch(JSON_PATH)
         .then(res => {
-          if (!res.ok) throw new Error('Network response was not ok');
+          if (!res.ok) throw new Error();
           return res.json();
         })
         .then(data => {
-          const list = Array.isArray(data) ? data : (Array.isArray(data.staff) ? data.staff : []);
-          if (!list.length) {
-            showFallback('No staff entries found.');
+
+          const list = Array.isArray(data) ? data : data.staff;
+
+          if (!list || !list.length) {
+            showFallback("No staff entries found.");
             return;
           }
 
-          // keep loading card visible while images are being checked
-          let appended = 0;
+          const results = new Array(list.length);
 
-          // create array of promises that resolve when each image is handled
-          const checks = list.map(item => {
+          const checks = list.map((item, index) => {
+
             return new Promise(resolve => {
-              // require an image path — you can change behavior to use a placeholder if you prefer
-              const src = item.img && item.img.trim() ? item.img.trim() : null;
+
+              const src = item.img?.trim();
+
               if (!src) {
-                // no image path -> skip
-                return resolve(false);
+                results[index] = null;
+                resolve();
+                return;
               }
 
-              // create the <img> element and only append it after load
-              const img = document.createElement('img');
-              img.alt = item.alt || (item.name ? item.name : 'Staff photo');
-              // set same class/attributes so CSS applies
-              img.style.width = '';
-              img.style.height = '';
-              img.style.objectFit = '';
-              img.className = 'staff-photo'; // optional class to inspect if needed
-
-              // success -> create card and append
-              img.onload = () => {
-                // style integrity: ensure expected class/styles are applied by moving into card
-                img.className = ''; // remove test class so CSS .staff img applies once placed
-                img.style.width = ''; // let CSS control
-                img.style.height = '';
-                const card = createCardWithImage(img, item);
-                // append before removing loading to keep content stable
-                container.appendChild(card);
-                appended++;
-                resolve(true);
-              };
-
-              // error -> skip this entry
-              img.onerror = () => {
-                resolve(false);
-              };
-
-              // start loading image
+              const img = new Image();
               img.src = src;
+              img.alt = item.alt || item.name || "Staff photo";
+
+              img.onload = () => {
+                results[index] = createCard(item, img);
+                resolve();
+              };
+
+              img.onerror = () => {
+                results[index] = null;
+                resolve();
+              };
+
             });
+
           });
 
-          // after all checks finish, if none appended show fallback; remove loading card
           Promise.all(checks).then(() => {
-            if (loading && loading.parentNode === container) {
-              container.removeChild(loading);
+
+            container.innerHTML = '';
+
+            let count = 0;
+
+            results.forEach(card => {
+              if (card) {
+                container.appendChild(card);
+                count++;
+              }
+            });
+
+            if (count === 0) {
+              showFallback("No valid staff images found.");
             }
-            if (appended === 0) {
-              showFallback('No valid staff images found.');
-            } else {
-              // Optionally: if you'd like cards to be ordered the same as the JSON,
-              // create them in sequence: for simplicity above we append as each image loads.
-            }
+
           });
+
         })
-        .catch(err => {
-          showFallback('Error loading staff list.');
+        .catch(() => {
+          showFallback("Error loading staff list.");
         });
+
     })();
   </script>
 </body>
