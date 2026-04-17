@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Peace Lutheran — Art Gallery</title>
+  <link rel="icon" href="../images/favicon.png" type="image/png" />
+  <style>
+    :root {
+      --primary: #0D348F;
+      --accent-gold: #F2C94C;
+      --accent-light: #0D7BEF;
+      --muted: #6B7280;
+      --bg: #F7F9FC;
+      --card: #FFFFFF;
+      --radius: 4px;
+      --max-width: 1100px;
+      --container-pad: 20px;
+      --shadow: 0 6px 20px rgba(13, 52, 143, 0.08);
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    * { box-sizing: border-box }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111
+    }
+
+    .wrap {
+      max-width: var(--max-width);
+      margin: 28px auto;
+      padding: 0 var(--container-pad)
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px }
+
+    .logo {
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700
+    }
+
+    nav { display: flex; align-items: center }
+
+    nav a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav a:hover { text-decoration: underline }
+
+    nav details {
+      position: relative;
+      margin-left: 18px;
+    }
+
+    nav summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0;
+      padding: 0;
+      outline: none;
+      user-select: none;
+    }
+
+    nav summary::-webkit-details-marker { display: none }
+
+    nav summary::after {
+      content: " ▾";
+      font-size: 0.9em;
+      color: var(--primary);
+      margin-left: 6px;
+      transition: transform 160ms ease;
+      display: inline-block;
+    }
+
+    nav details[open] summary::after { transform: rotate(-180deg) }
+
+    nav details > ul {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+      padding: 8px 6px;
+      min-width: 180px;
+      z-index: 100;
+      margin: 0;
+      list-style: none;
+    }
+
+    nav details > ul li { padding: 8px 12px; white-space: nowrap }
+
+    nav details > ul li a {
+      margin-left: 18px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    nav details > ul li a:hover { text-decoration: underline }
+
+    /* ── Page Hero Banner ── */
+    .page-banner {
+      margin-top: 28px;
+      background: var(--primary);
+      border-radius: 6px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(242,201,76,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(13,123,239,0.22) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .page-banner .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .page-banner h1 {
+      margin: 0 0 10px;
+      font-size: 36px;
+      color: #fff;
+      position: relative;
+    }
+
+    .page-banner p {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 560px;
+      position: relative;
+    }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .filter-bar span {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 13px;
+      margin-right: 4px;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 2px solid transparent;
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 160ms, color 160ms, background 160ms;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ── Gallery Grid ── */
+    #gallery {
+      margin-top: 24px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    /* Art Card */
+    .art-card {
+      background: var(--card);
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      display: flex;
+      flex-direction: column;
+      /* reveal animation */
+      opacity: 0;
+      transform: translateY(18px);
+      animation: cardReveal 500ms ease forwards;
+    }
+
+    @keyframes cardReveal {
+      to { opacity: 1; transform: translateY(0) }
+    }
+
+    .art-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(13, 52, 143, 0.15);
+    }
+
+    .art-card-image {
+      position: relative;
+      width: 100%;
+      padding-top: 68%; /* aspect ratio */
+      overflow: hidden;
+      background: linear-gradient(135deg, #e8edf7 0%, #cdd7f0 100%);
+      flex-shrink: 0;
+    }
+
+    .art-card-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 360ms ease, opacity 300ms ease;
+      opacity: 0;
+    }
+
+    .art-card-image img.loaded { opacity: 1 }
+
+    .art-card:hover .art-card-image img {
+      transform: scale(1.04);
+    }
+
+    /* overlay badge for medium */
+    .medium-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(13,52,143,0.82);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
+    /* placeholder shimmer while image loads */
+    .art-card-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        rgba(200,210,235,0.4) 0%,
+        rgba(220,228,248,0.8) 40%,
+        rgba(200,210,235,0.4) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+      z-index: 0;
+    }
+
+    .art-card-image img.loaded ~ .art-card-image::before,
+    .art-card-image:has(img.loaded)::before {
+      display: none;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0 }
+      100% { background-position: -200% 0 }
+    }
+
+    .art-card-body {
+      padding: 16px 18px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .art-card-title {
+      margin: 0;
+      font-size: 17px;
+      color: var(--primary);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .art-card-desc {
+      margin: 0;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .art-card-footer {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .art-card-view {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-light);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 200ms, transform 200ms;
+    }
+
+    .art-card:hover .art-card-view {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Empty / Error state */
+    .gallery-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 12, 35, 0.88);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .lightbox-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-inner {
+      background: var(--card);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 860px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      transform: scale(0.95) translateY(10px);
+      transition: transform 280ms ease;
+      max-height: 90vh;
+    }
+
+    .lightbox-overlay.open .lightbox-inner {
+      transform: scale(1) translateY(0);
+    }
+
+    .lightbox-img-wrap {
+      background: #0a0f22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 340px;
+      overflow: hidden;
+    }
+
+    .lightbox-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      max-height: 90vh;
+    }
+
+    .lightbox-details {
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    .lightbox-medium {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+    }
+
+    .lightbox-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .lightbox-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    .lightbox-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #333;
+      flex: 1;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      transition: background 160ms;
+    }
+
+    .lightbox-close:hover { background: rgba(255,255,255,0.24) }
+
+    /* lightbox nav arrows */
+    .lightbox-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .lb-arrow {
+      flex: 1;
+      padding: 10px;
+      background: var(--bg);
+      border: 2px solid rgba(13,52,143,0.15);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      transition: background 160ms, border-color 160ms;
+    }
+
+    .lb-arrow:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .lb-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    /* ── Count badge ── */
+    .count-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 18px 0;
+      border-top: 1px solid #eee;
+      background: transparent;
+      margin-top: 48px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 0 var(--container-pad);
+      max-width: 100%;
+    }
+
+    .footer-center {
+      justify-self: center;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .footer-right { justify-self: end }
+
+    .footer-link {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      height: 28px;
+      opacity: .8;
+      transition: transform .16s, opacity .16s
+    }
+
+    .footer-link:hover .footer-logo {
+      opacity: 1;
+      transform: translateY(-1px)
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr) }
+
+      .lightbox-inner {
+        grid-template-columns: 1fr;
+        max-height: 92vh;
+        overflow-y: auto;
+      }
+
+      .lightbox-img-wrap {
+        min-height: 220px;
+        max-height: 280px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-right { justify-self: center }
+
+      nav details > ul { left: auto; right: 0 }
+    }
+
+    @media (max-width: 560px) {
+      .gallery-grid { grid-template-columns: 1fr }
+
+      .page-banner { padding: 28px 20px }
+
+      .page-banner h1 { font-size: 26px }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .footer-right { justify-self: center }
+    }
+
+    html { scroll-behavior: smooth }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <img class="logo" src="../images/logo.png" alt="Peace Lutheran logo">
+        <div>
+          <div style="font-weight:800;color:var(--primary)">Peace Lutheran</div>
+          <div style="font-size:12px;color:var(--muted)">A welcoming Lutheran congregation</div>
+        </div>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="https://maps.app.goo.gl/FXUWn1VD3qzejPuw7">Visit</a>
+        <a href="/#devotion">Daily Devotion</a>
+        <a href="/#events">Calendar</a>
+        <a href="/staff/">Staff</a>
+        <details>
+          <summary>Other</summary>
+          <ul>
+            <li><a href="/art/">Bible Studies</a></li>
+            <li><a href="/bible-studies/">Bible Studies</a></li>
+            <li><a href="/events/">Events</a></li>
+            <li><a href="/sermons/">Sermons</a></li>
+            <li><a href="/staff/">Staff</a></li>
+          </ul>
+        </details>
+      </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <div class="page-banner">
+      <div class="eyebrow">Peace Lutheran Church</div>
+      <h1>Art of the Church</h1>
+      <p>A collection of the sacred art, stained glass, sculptures, and works that adorn our congregation — each one a quiet act of worship.</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <span>Filter by:</span>
+      <button class="filter-btn active" data-medium="all">All</button>
+    </div>
+
+    <div class="count-label" id="count-label"></div>
+
+    <!-- Gallery -->
+    <div id="gallery">
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div></div>
+        <div class="footer-center">© <span id="year">2026</span> Peace Lutheran Church — All rights reserved</div>
+        <div class="footer-right">
+          <a href="https://kaiserwebdesign.net" target="_blank" rel="noopener" class="footer-link">
+            <span>Website by</span>
+            <img src="../images/KaiserWebDesignMutedLogo.png" alt="Kaiser Web Design logo" class="footer-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- .wrap -->
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Art detail">
+    <button class="lightbox-close" id="lb-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="lightbox-inner" id="lb-inner">
+      <div class="lightbox-img-wrap">
+        <img id="lb-img" src="" alt="" />
+      </div>
+      <div class="lightbox-details">
+        <div class="lightbox-medium" id="lb-medium"></div>
+        <h2 class="lightbox-title" id="lb-title"></h2>
+        <div class="lightbox-divider"></div>
+        <p class="lightbox-desc" id="lb-desc"></p>
+        <div class="lightbox-nav">
+          <button class="lb-arrow" id="lb-prev">← Previous</button>
+          <button class="lb-arrow" id="lb-next">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Close dropdown on outside click ──
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('nav details[open]').forEach(d => {
+        if (!d.contains(e.target)) d.removeAttribute('open');
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') document.querySelectorAll('nav details[open]').forEach(d => d.removeAttribute('open'));
+    });
+
+    // ── Gallery Logic ──
+    let allArt = [];
+    let filteredArt = [];
+    let currentIndex = 0;
+    let activeFilter = 'all';
+
+    const grid = document.getElementById('gallery-grid');
+    const filterBar = document.querySelector('.filter-bar');
+    const countLabel = document.getElementById('count-label');
+
+    // Lightbox elements
+    const lightbox = document.getElementById('lightbox');
+    const lbImg    = document.getElementById('lb-img');
+    const lbTitle  = document.getElementById('lb-title');
+    const lbDesc   = document.getElementById('lb-desc');
+    const lbMedium = document.getElementById('lb-medium');
+    const lbClose  = document.getElementById('lb-close');
+    const lbPrev   = document.getElementById('lb-prev');
+    const lbNext   = document.getElementById('lb-next');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const item = filteredArt[index];
+      lbImg.src = item.img;
+      lbImg.alt = item.title;
+      lbTitle.textContent = item.title;
+      lbDesc.textContent = item.description;
+      lbMedium.textContent = item.medium || '';
+      lbPrev.disabled = index === 0;
+      lbNext.disabled = index === filteredArt.length - 1;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    lbClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    lbPrev.addEventListener('click', () => { if (currentIndex > 0) openLightbox(currentIndex - 1) });
+    lbNext.addEventListener('click', () => { if (currentIndex < filteredArt.length - 1) openLightbox(currentIndex + 1) });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && currentIndex > 0) openLightbox(currentIndex - 1);
+      if (e.key === 'ArrowRight' && currentIndex < filteredArt.length - 1) openLightbox(currentIndex + 1);
+    });
+
+    // Build filter buttons from unique mediums
+    function buildFilters(artItems) {
+      const mediums = [...new Set(artItems.map(a => a.medium).filter(Boolean))];
+      mediums.forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.medium = m;
+        btn.textContent = m;
+        filterBar.appendChild(btn);
+      });
+
+      filterBar.addEventListener('click', function (e) {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.medium;
+        renderGallery();
+      });
+    }
+
+    // Render cards
+    function renderGallery() {
+      filteredArt = activeFilter === 'all'
+        ? [...allArt]
+        : allArt.filter(a => a.medium === activeFilter);
+
+      countLabel.textContent = filteredArt.length === 0
+        ? ''
+        : `Showing ${filteredArt.length} work${filteredArt.length !== 1 ? 's' : ''}`;
+
+      grid.innerHTML = '';
+
+      if (filteredArt.length === 0) {
+        grid.innerHTML = '<div class="gallery-empty">No artworks found for this medium.</div>';
+        return;
+      }
+
+      filteredArt.forEach((item, idx) => {
+        const delay = (idx % 9) * 60; // stagger per row
+
+        const card = document.createElement('div');
+        card.className = 'art-card';
+        card.style.animationDelay = delay + 'ms';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `View ${item.title}`);
+
+        card.innerHTML = `
+          <div class="art-card-image">
+            <img src="${item.img}" alt="${item.title}" loading="lazy" />
+            ${item.medium ? `<span class="medium-badge">${item.medium}</span>` : ''}
+          </div>
+          <div class="art-card-body">
+            <h3 class="art-card-title">${item.title}</h3>
+            <p class="art-card-desc">${item.description}</p>
+            <div class="art-card-footer">
+              <span class="art-card-view">View full ›</span>
+            </div>
+          </div>
+        `;
+
+        // Lazy-load opacity reveal
+        const img = card.querySelector('img');
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        if (img.complete) img.classList.add('loaded');
+
+        // Open lightbox
+        card.addEventListener('click', () => openLightbox(idx));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx); }
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    // Fetch art.json
+    fetch('art.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Could not load art.json — status ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+          grid.innerHTML = '<div class="gallery-empty">No artworks have been added yet.</div>';
+          return;
+        }
+        allArt = data;
+        buildFilters(allArt);
+        renderGallery();
+      })
+      .catch(err => {
+        console.error(err);
+        grid.innerHTML = `<div class="gallery-empty">Unable to load artwork. Please try again later.</div>`;
+      });
+  </script>
+
+</body>
+</html>
