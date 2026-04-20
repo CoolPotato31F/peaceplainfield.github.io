@@ -1,8 +1,62 @@
 [
   {
-    "img": "images/art/",
-    "title": "",
-    "description": "",
+    "img": "1.jpg",
+    "title": "Title 1",
+    "description": "Description 1",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "2.jpg",
+    "title": "Title 2",
+    "description": "Description 2",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "3.jpg",
+    "title": "Title 3",
+    "description": "Description 3",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "4.jpg",
+    "title": "Title 4",
+    "description": "Description 4",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "5.jpg",
+    "title": "Title 5",
+    "description": "Description 5",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "6.jpg",
+    "title": "Title 6",
+    "description": "Description 6",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "7.jpg",
+    "title": "Title 7",
+    "description": "Description 7",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "8.jpg",
+    "title": "Title 8",
+    "description": "Description 8",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "9.jpg",
+    "title": "Title 9",
+    "description": "Description 9",
+    "medium": "Stained Glass"
+  },
+  {
+    "img": "10.jpg",
+    "title": "Title 10",
+    "description": "Description 10",
     "medium": "Stained Glass"
   }
 ]
