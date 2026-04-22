@@ -673,7 +673,7 @@
     function openLightbox(index) {
       currentIndex = index;
       const item = filteredArt[index];
-      lbImg.src = item.img;
+      lbImg.src = '../images/Art/' + item.img;
       lbImg.alt = item.title;
       lbTitle.textContent = item.title;
       lbDesc.textContent = item.description;
